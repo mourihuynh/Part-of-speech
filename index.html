@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compass English | Parts of Speech — Hệ Thống Thẻ Từ Loại Toàn Diện</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      font-size: 18px;
+    }
+    @media (min-width: 1024px) {
+      :root {
+        font-size: 19px;
+      }
+    }
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background-color: #eef2f6;
+      color: #0f172a;
+      overflow-x: hidden;
+    }
+    .font-display {
+      font-family: 'Plus Jakarta Sans', 'Be Vietnam Pro', sans-serif;
+    }
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .card-surface {
+      background-color: #ffffff;
+      border-radius: 28px;
+      border: 2px solid #cbd5e1;
+      box-shadow: 0 14px 30px -14px rgba(15, 23, 42, 0.12);
+    }
+    .tile-btn {
+      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background-color 0.16s ease;
+    }
+    .tile-btn:hover {
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-indigo-700 selection:text-white">
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b-2 border-slate-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-3">
+      <button type="button" onclick="openOverview()" class="flex items-center gap-3 text-left focus:outline-none">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-indigo-700 to-sky-600 flex items-center justify-center text-white font-display font-extrabold text-lg shadow">
+          CE
+        </div>
+        <div>
+          <span class="font-display font-extrabold text-lg sm:text-xl text-slate-950 block leading-none">
+            Compass <span class="text-indigo-700">English</span>
+          </span>
+          <span class="text-xs font-extrabold text-slate-600 mt-1 block">Parts of Speech • 8 Nhóm (41 Thẻ Con)</span>
+        </div>
+      </button>
+
+      <div class="flex items-center gap-2">
+        <div class="inline-flex rounded-xl bg-slate-200 p-1">
+          <button type="button" id="btn-accent-us" onclick="setAccent('en-US')" class="px-2.5 py-1 rounded-lg text-xs font-extrabold bg-white text-indigo-800 shadow-sm transition">US</button>
+          <button type="button" id="btn-accent-uk" onclick="setAccent('en-GB')" class="px-2.5 py-1 rounded-lg text-xs font-extrabold text-slate-700 hover:text-slate-950 transition">UK</button>
+        </div>
+        <button type="button" onclick="openOverview()" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-extrabold bg-slate-900 hover:bg-slate-800 text-white transition">
+          Giới thiệu chung
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+
+    <!-- ==================== BỘ CHỌN 8 NHÓM LỚN & CÁC THÀNH PHẦN CON RIÊNG BIỆT ==================== -->
+    <section class="card-surface p-5 sm:p-7 space-y-5">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 border-b-2 border-slate-200 pb-4">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-indigo-700">PARTS OF SPEECH (TỪ LOẠI)</span>
+          <h1 class="font-display text-2xl sm:text-3xl font-extrabold text-slate-950">
+            Hệ Thống Thẻ Từ Loại Tiếng Anh
+          </h1>
+        </div>
+        <div id="current-breadcrumb" class="px-3.5 py-1.5 rounded-full bg-indigo-100 text-indigo-950 text-xs sm:text-sm font-extrabold border border-indigo-300 self-start lg:self-auto">
+          Giới thiệu chung PARTS OF SPEECH
+        </div>
+      </div>
+
+      <!-- 8 Nhóm lớn (1.1 -> 1.8) -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2" id="group-buttons"></div>
+
+      <!-- Danh sách thẻ thành phần con của nhóm đang chọn -->
+      <div class="space-y-2.5 pt-1">
+        <div class="flex items-center justify-between gap-2">
+          <span id="sub-list-title" class="text-xs font-extrabold uppercase tracking-wider text-slate-600">
+            Các thẻ thành phần con (bấm để mở thẻ riêng):
+          </span>
+          <span id="sub-count-badge" class="text-xs font-bold text-indigo-700"></span>
+        </div>
+        <div class="flex flex-wrap gap-2" id="subtopic-pills"></div>
+      </div>
+    </section>
+
+    <!-- ==================== THẺ GIỚI THIỆU CHUNG CHỦ ĐỀ LỚN PARTS OF SPEECH ==================== -->
+    <section id="overview-card" class="card-surface p-6 sm:p-8 space-y-6">
+      <div class="space-y-3">
+        <span class="px-3.5 py-1 rounded-full bg-indigo-100 text-indigo-950 text-xs font-extrabold uppercase tracking-wider">
+          Tổng Quan Chủ Đề Lớn
+        </span>
+        <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-slate-950">
+          PARTS OF SPEECH (TỪ LOẠI) — NỀN TẢNG CỦA MỌI CÂU TIẾNG ANH
+        </h2>
+        <p class="text-base sm:text-lg text-slate-800 leading-relaxed">
+          Trong tiếng Anh, mỗi từ đều thuộc một hoặc nhiều <strong>Part of Speech (Từ loại)</strong> tùy theo ý nghĩa và chức năng ngữ pháp của nó trong câu. Hiểu rõ <strong>8 nhóm từ loại (1.1 – 1.8)</strong> và từng thành phần con giúp bạn chia đúng động từ, chọn đúng giới từ, sắp xếp tính từ/trạng từ chuẩn xác và đặt câu tự nhiên mà không dịch thô theo tiếng Việt.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" id="overview-8-grid"></div>
+    </section>
+
+    <!-- ==================== THẺ RIÊNG BIỆT CỦA TỪNG THÀNH PHẦN CON ==================== -->
+    <section id="subtopic-detail-card" class="hidden card-surface p-6 sm:p-8 space-y-8">
+      <!-- Render đầy đủ 6 mục I -> VI cho 1 thẻ thành phần con duy nhất -->
+    </section>
+
+  </main>
+
+  <script>
+    let currentAccent = 'en-US';
+    let currentGroupIdx = 0;
+    let currentSubIdx = 0;
+    let isOverviewMode = true;
+    let subShowAllQ = false;
+    const subAnswers = {};
+
+    function setAccent(acc) {
+      currentAccent = acc;
+      document.getElementById('btn-accent-us').className = acc === 'en-US'
+        ? 'px-2.5 py-1 rounded-lg text-xs font-extrabold bg-white text-indigo-800 shadow-sm transition'
+        : 'px-2.5 py-1 rounded-lg text-xs font-extrabold text-slate-700 hover:text-slate-950 transition';
+      document.getElementById('btn-accent-uk').className = acc === 'en-GB'
+        ? 'px-2.5 py-1 rounded-lg text-xs font-extrabold bg-white text-indigo-800 shadow-sm transition'
+        : 'px-2.5 py-1 rounded-lg text-xs font-extrabold text-slate-700 hover:text-slate-950 transition';
+    }
+
+    function speakText(text) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = currentAccent;
+      u.rate = 0.96;
+      window.speechSynthesis.speak(u);
+    }
+
+    // Hàm hỗ trợ tạo 10 bài tập đa dạng cho từng thành phần con
+    function buildTenExercises(subName, codeLabel, keyTip, sampleCorrectWord, alt1, alt2, alt3, sampleSent) {
+      return [
+        {
+          id: 0,
+          type: 'mcq',
+          prompt: `1. [${codeLabel} - ${subName}] Chọn đáp án chính xác nhất để hoàn thành câu: "${sampleSent.replace(new RegExp(sampleCorrectWord, 'i'), '______')}"`,
+          options: [`A. ${sampleCorrectWord}`, `B. ${alt1}`, `C. ${alt2}`, `D. ${alt3}`],
+          answer: 0,
+          explain: `Đáp án đúng là "${sampleCorrectWord}" vì phù hợp với quy tắc của ${subName}: ${keyTip}.`
+        },
+        {
+          id: 1,
+          type: 'mcq',
+          prompt: `2. Đâu là đặc điểm cốt lõi của ${subName} (${codeLabel})?`,
+          options: [
+            `A. ${keyTip}`,
+            'B. Luôn là liên từ nối hai mệnh đề độc lập bằng dấu chấm phẩy',
+            'C. Chỉ dùng trong văn thơ cổ, không dùng trong giao tiếp hiện đại',
+            'D. Không bao giờ xuất hiện trong câu khẳng định'
+          ],
+          answer: 0,
+          explain: `${subName} tuân theo nguyên tắc: ${keyTip}.`
+        },
+        {
+          id: 2,
+          type: 'fill',
+          prompt: `3. Điền từ/cụm từ phù hợp (${sampleCorrectWord}) vào chỗ trống: "${sampleSent.replace(new RegExp(sampleCorrectWord, 'i'), '_____')}"`,
+          placeholder: `Nhập ${sampleCorrectWord}`,
+          accepted: [sampleCorrectWord.toLowerCase()],
+          explain: `Từ cần điền là "${sampleCorrectWord}" dựa theo ngữ cảnh của ${subName}.`
+        },
+        {
+          id: 3,
+          type: 'mcq',
+          prompt: `4. Trong các lựa chọn sau, lựa chọn nào thể hiện đúng cách dùng ${subName}?`,
+          options: [
+            `A. ${sampleCorrectWord} — đúng cấu trúc & ngữ cảnh`,
+            `B. ${alt1} — sai chức năng trong ngữ cảnh này`,
+            `C. ${alt2} — không phù hợp quy tắc`,
+            `D. ${alt3} — dễ gây nhầm lẫn ngữ pháp`
+          ],
+          answer: 0,
+          explain: `"${sampleCorrectWord}" đáp ứng đúng yêu cầu của ${subName}.`
+        },
+        {
+          id: 4,
+          type: 'tf',
+          prompt: `5. Đúng hay Sai: Khi áp dụng ${subName}, cần chú ý ${keyTip}.`,
+          options: ['A. Đúng (True)', 'B. Sai (False)'],
+          answer: 0,
+          explain: `Đúng. ${keyTip} là lưu ý quan trọng khi sử dụng ${subName}.`
+        },
+        {
+          id: 5,
+          type: 'mcq',
+          prompt: `6. Câu nào dưới đây minh họa tốt nhất cho ${subName}?`,
+          options: [
+            `A. ${sampleSent}`,
+            'B. She go to school yesterday morning.',
+            'C. They has many informations today.',
+            'D. He very quickly runs home.'
+          ],
+          answer: 0,
+          explain: `Câu A ("${sampleSent}") chuẩn xác và minh họa rõ cho ${subName}.`
+        },
+        {
+          id: 6,
+          type: 'fill',
+          prompt: `7. Luyện gõ chính xác từ trọng tâm của mục này: "${sampleCorrectWord}"`,
+          placeholder: 'Gõ lại đáp án',
+          accepted: [sampleCorrectWord.toLowerCase()],
+          explain: `Ghi nhớ chính tả và cách dùng của "${sampleCorrectWord}".`
+        },
+        {
+          id: 7,
+          type: 'mcq',
+          prompt: `8. Khi làm bài đọc/viết tiếng Anh, việc nắm vững ${subName} giúp ích gì nhiều nhất?`,
+          options: [
+            'A. Nhận diện đúng chức năng từ, tránh sai cấu trúc và dịch sai nghĩa',
+            'B. Bỏ qua hoàn toàn dấu câu trong câu phức',
+            'C. Không cần chia động từ theo chủ ngữ',
+            'D. Chỉ dùng một từ cho mọi tình huống'
+          ],
+          answer: 0,
+          explain: `Nắm chắc ${subName} giúp phân tích câu nhanh, chính xác và viết tự nhiên.`
+        },
+        {
+          id: 8,
+          type: 'mcq',
+          prompt: `9. Nếu gặp bẫy dễ nhầm liên quan đến ${subName}, bước kiểm tra đầu tiên nên làm là gì?`,
+          options: [
+            'A. Xác định vị trí, số ít/số nhiều hoặc chức năng ngữ pháp của từ trong câu',
+            'B. Đoán ngẫu nhiên không đọc ngữ cảnh',
+            'C. Dịch từng từ sang tiếng Việt rồi ghép lại',
+            'D. Xóa từ đó khỏi câu'
+          ],
+          answer: 0,
+          explain: `Kiểm tra vị trí và chức năng ngữ pháp giúp tránh bẫy phổ biến nhất.`
+        },
+        {
+          id: 9,
+          type: 'mcq',
+          prompt: `10. Tổng kết lại, mục "${subName}" thuộc nhóm từ loại nào trong hệ thống Parts of Speech?`,
+          options: [
+            `A. Nhóm ${codeLabel}`,
+            'B. Không thuộc Parts of Speech',
+            'C. Chỉ là dấu câu',
+            'D. Chỉ là thán từ'
+          ],
+          answer: 0,
+          explain: `${subName} nằm trong nhóm ${codeLabel} của hệ thống Parts of Speech.`
+        }
+      ];
+    }
+
+    // Dữ liệu đầy đủ 8 nhóm lớn (1.1 -> 1.8) và toàn bộ 41 thẻ thành phần con
+    const POS_GROUPS = [
+      {
+        code: '1.1',
+        en: 'Nouns',
+        vi: 'Danh từ',
+        intro: 'Từ gọi tên người, vật, địa điểm, khái niệm hoặc hiện tượng; đóng vai trò chủ ngữ, tân ngữ hoặc bổ ngữ.',
+        subtopics: [
+          {
+            name: 'Countable nouns',
+            viSub: 'Danh từ đếm được',
+            def: 'Countable nouns (Danh từ đếm được) là danh từ chỉ người, vật hoặc sự việc có thể đếm trực tiếp bằng số (1, 2, 3...) và tồn tại ở cả dạng số ít lẫn số nhiều.',
+            usage: [
+              'Đếm số lượng cụ thể: "I have two notebooks in my bag."',
+              'Dùng với mạo từ a/an khi ở số ít không xác định: "She bought an apple."',
+              'Dùng với many, a few, few khi ở số nhiều: "Many students attended the workshop."'
+            ],
+            structures: [
+              { pattern: 'a / an + Singular Countable Noun', ex: 'a student, an orange, a university' },
+              { pattern: 'Number / many / (a) few + Plural Countable Noun', ex: 'three books, many ideas, a few minutes' }
+            ],
+            note: 'Danh từ đếm được số ít không thể đứng trơ một mình nếu thiếu từ hạn định (a/an/the/my...).',
+            noteEx: 'Sai: "She has car." → Đúng: "She has a car."',
+            applications: [
+              'In speaking: "I need to buy a new laptop for my online classes."',
+              'In writing: "Several factors influence language learning outcomes."',
+              'In reading/TOEIC: Nhận diện danh từ số nhiều sau "many / a number of / several".'
+            ],
+            sampleSentence: 'She bought three books yesterday.',
+            correctWord: 'three books',
+            alt1: 'much book',
+            alt2: 'a books',
+            alt3: 'little book',
+            keyTip: 'có dạng số ít và số nhiều, đếm được bằng số'
+          },
+          {
+            name: 'Uncountable nouns',
+            viSub: 'Danh từ không đếm được',
+            def: 'Uncountable nouns (Danh từ không đếm được) là danh từ chỉ chất liệu, chất lỏng, khái niệm trừu tượng hoặc tập hợp không đếm trực tiếp từng đơn vị bằng số.',
+            usage: [
+              'Chỉ chất lỏng, chất liệu, thực phẩm dạng khối: "Please pass me some water."',
+              'Chỉ thông tin, lời khuyên, kiến thức, đồ đạc: "She gave me helpful advice."',
+              'Dùng với much, (a) little, some, any và chia động từ số ít: "Much time is needed."'
+            ],
+            structures: [
+              { pattern: 'Uncountable Noun + Singular Verb (is / has / V-s)', ex: 'Information is essential for decision-making.' },
+              { pattern: 'Unit noun + of + Uncountable Noun (để đếm)', ex: 'a glass of water, two pieces of advice, a loaf of bread' }
+            ],
+            note: 'Các từ như advice, information, news, furniture, luggage, equipment, homework không đếm được và không thêm -s.',
+            noteEx: 'Sai: "He gave me many advices." → Đúng: "He gave me some useful advice."',
+            applications: [
+              'In emails/workplace: "Thank you for sending the latest information."',
+              'In daily life: "We need a little sugar for this recipe."',
+              'In grammar tests: Chọn "much / a little" thay vì "many / a few".'
+            ],
+            sampleSentence: 'She gave me helpful advice before the interview.',
+            correctWord: 'advice',
+            alt1: 'advices',
+            alt2: 'an advice',
+            alt3: 'many advice',
+            keyTip: 'không đếm trực tiếp bằng số, chia số ít, không thêm -s'
+          },
+          {
+            name: 'Singular nouns',
+            viSub: 'Danh từ số ít',
+            def: 'Singular nouns (Danh từ số ít) là danh từ chỉ một người, một vật, một địa điểm hoặc một khái niệm duy nhất.',
+            usage: [
+              'Chỉ một đối tượng cụ thể: "The teacher is explaining the grammar rule."',
+              'Đi với động từ chia số ít ở hiện tại đơn: "My brother works from home."',
+              'Đi với this / that / each / every: "Every student has a workbook."'
+            ],
+            structures: [
+              { pattern: 'Determiner + Singular Noun + Singular Verb', ex: 'This lesson starts at 7:30 PM.' },
+              { pattern: 'Each / Every + Singular Noun + Singular Verb', ex: 'Every member receives a certificate.' }
+            ],
+            note: 'Chọn "a" hay "an" phụ thuộc vào âm đầu khi phát âm, không phụ thuộc chữ cái viết ra.',
+            noteEx: 'Đúng: "an honest person" (âm /ɒ/), "a university" (âm /juː/).',
+            applications: [
+              'In introductions: "I am a teacher from Vietnam."',
+              'In schedules: "The meeting begins at nine o\'clock."',
+              'In subject-verb agreement: Chia "is / does / has" khi chủ ngữ là danh từ số ít.'
+            ],
+            sampleSentence: 'The teacher is checking our homework.',
+            correctWord: 'teacher',
+            alt1: 'teachers are',
+            alt2: 'some teacher',
+            alt3: 'many teacher',
+            keyTip: 'chỉ một đối tượng và chia động từ số ít'
+          },
+          {
+            name: 'Plural nouns',
+            viSub: 'Danh từ số nhiều',
+            def: 'Plural nouns (Danh từ số nhiều) là danh từ chỉ từ hai người, vật hoặc sự việc trở lên, thường được tạo bằng cách thêm -s hoặc -es vào danh từ đếm được.',
+            usage: [
+              'Thêm -s cho đa số danh từ: "She has two pens and three notebooks."',
+              'Thêm -es khi tận cùng là -s, -ss, -sh, -ch, -x, -z: "Buses run every fifteen minutes."',
+              'Đổi phụ âm + y thành -ies: "Many cities are growing rapidly."'
+            ],
+            structures: [
+              { pattern: 'Noun + -s / -es / -ies + Plural Verb', ex: 'Boxes are stacked near the door.' },
+              { pattern: 'Plural Noun sau these / those / all / several', ex: 'These exercises are very helpful.' }
+            ],
+            note: 'Danh từ tận cùng là nguyên âm + y chỉ thêm -s bình thường (boys, days, keys).',
+            noteEx: 'Sai: "boies / daies" → Đúng: "boys / days".',
+            applications: [
+              'In classroom instructions: "Please open your books to page ten."',
+              'In reports: "Online courses attract many learners."',
+              'In pluralization: Nhận biết quy tắc -s, -es, -ies.'
+            ],
+            sampleSentence: 'Many students enjoy interactive lessons.',
+            correctWord: 'students',
+            alt1: 'studentes',
+            alt2: 'a students',
+            alt3: 'much students',
+            keyTip: 'chỉ từ hai trở lên, thêm -s/-es/-ies theo quy tắc'
+          },
+          {
+            name: 'Irregular plurals',
+            viSub: 'Danh từ số nhiều bất quy tắc',
+            def: 'Irregular plurals (Danh từ số nhiều bất quy tắc) là các danh từ số nhiều không theo quy tắc thêm -s/-es thông thường mà biến đổi nguyên âm hoặc giữ nguyên hình thức.',
+            usage: [
+              'Biến đổi nguyên âm bên trong: "Two men and three women joined the meeting."',
+              'Dạng đặc biệt với -en / đổi âm: "Children love playing outdoors." / "He brushed his teeth."',
+              'Giữ nguyên hình thức giữa số ít và số nhiều: "There are ten sheep in the field."'
+            ],
+            structures: [
+              { pattern: 'Irregular plural noun (men, women, children, feet, teeth)', ex: 'Children need plenty of sleep.' },
+              { pattern: 'Unchanged plural noun (sheep, deer, fish/fishes, series)', ex: 'Two sheep crossed the road.' }
+            ],
+            note: 'Không thêm -s vào sau các từ đã ở dạng số nhiều bất quy tắc như children, men, women, people.',
+            noteEx: 'Sai: "childrens / peoples" → Đúng: "children / people".',
+            applications: [
+              'In everyday speech: "There are many people in the room."',
+              'In reading/tests: Dễ xuất hiện trong bẫy chia số ít/số nhiều.',
+              'In pronunciation: Phân biệt "woman" (/ˈwʊmən/) và "women" (/ˈwɪmɪn/).'
+            ],
+            sampleSentence: 'Two children are waiting outside.',
+            correctWord: 'children',
+            alt1: 'childs',
+            alt2: 'childrens',
+            alt3: 'a children',
+            keyTip: 'biến đổi đặc biệt hoặc giữ nguyên, không thêm -s thừa'
+          },
+          {
+            name: 'Collective nouns',
+            viSub: 'Danh từ tập hợp',
+            def: 'Collective nouns (Danh từ tập hợp) là danh từ số ít về hình thức dùng để chỉ một nhóm người, động vật hoặc sự vật như một tập thể.',
+            usage: [
+              'Chia động từ số ít khi nhấn mạnh cả nhóm như một đơn vị: "The team has won three matches."',
+              'Chia động từ số nhiều khi nhấn mạnh các cá thể hành động riêng lẻ: "The staff are divided on the plan."',
+              'Nhóm luôn chia số nhiều: "The police are investigating the incident."'
+            ],
+            structures: [
+              { pattern: 'Collective Noun + Singular Verb (đơn vị thống nhất)', ex: 'The committee meets every Monday.' },
+              { pattern: 'Collective Noun + Plural Verb (từng cá thể / police, cattle)', ex: 'The police are arriving soon.' }
+            ],
+            note: '"police" và "cattle" luôn đi với động từ số nhiều trong tiếng Anh chuẩn.',
+            noteEx: 'Sai: "The police is coming." → Đúng: "The police are coming."',
+            applications: [
+              'In teamwork: "Our team is ready for the presentation."',
+              'In news/reports: "The family lives in Ho Chi Minh City."',
+              'In grammar exams: Xác định ngữ cảnh tập thể hay cá thể.'
+            ],
+            sampleSentence: 'The police are investigating the case.',
+            correctWord: 'are',
+            alt1: 'is',
+            alt2: 'was',
+            alt3: 'has',
+            keyTip: 'chia số ít hoặc số nhiều tùy ngữ cảnh; police/cattle luôn số nhiều'
+          },
+          {
+            name: 'Abstract nouns',
+            viSub: 'Danh từ trừu tượng',
+            def: 'Abstract nouns (Danh từ trừu tượng) là danh từ biểu thị cảm xúc, phẩm chất, trạng thái, ý tưởng hoặc khái niệm không thể sờ nắm trực tiếp bằng giác quan vật lý.',
+            usage: [
+              'Nói về phẩm chất và giá trị: "Honesty and kindness build trust."',
+              'Nói về cảm xúc và trạng thái: "Happiness comes from simple habits."',
+              'Nói về kiến thức, tự do, thành công: "Knowledge empowers learners."'
+            ],
+            structures: [
+              { pattern: 'Abstract Noun + Verb (thường chia số ít)', ex: 'Patience leads to better results.' },
+              { pattern: 'Adj + -ness / -ity / -tion / -ment / -dom', ex: 'kindness, ability, education, improvement, freedom' }
+            ],
+            note: 'Khi nói nghĩa khái quát, danh từ trừu tượng thường không dùng mạo từ "a/an".',
+            noteEx: 'Sai: "A happiness is important." → Đúng: "Happiness is important."',
+            applications: [
+              'In essays/speaking: "Confidence improves speaking fluency."',
+              'In word formation: Chuyển tính từ/động từ thành danh từ trừu tượng.',
+              'In daily reflections: "Gratitude helps reduce stress."'
+            ],
+            sampleSentence: 'Honesty is essential in any relationship.',
+            correctWord: 'Honesty',
+            alt1: 'An honesty',
+            alt2: 'Honest',
+            alt3: 'Honestly',
+            keyTip: 'chỉ khái niệm/cảm xúc/phẩm chất, thường không dùng a/an khi khái quát'
+          },
+          {
+            name: 'Compound nouns',
+            viSub: 'Danh từ ghép',
+            def: 'Compound nouns (Danh từ ghép) là danh từ được tạo thành từ hai hoặc nhiều từ kết hợp (viết liền, viết tách hoặc có dấu gạch nối) để chỉ một sự vật/khái niệm thống nhất.',
+            usage: [
+              'Viết liền phổ biến: "Please open your notebook."',
+              'Viết tách hai từ: "We are waiting at the bus stop."',
+              'Có dấu gạch nối: "My sister-in-law lives nearby."'
+            ],
+            structures: [
+              { pattern: 'Noun + Noun (phổ biến nhất)', ex: 'classroom, toothache, post office' },
+              { pattern: 'Adj / Verb + Noun hoặc Noun + Prep + Noun', ex: 'blackboard, swimming pool, mother-in-law' }
+            ],
+            note: 'Khi chuyển sang số nhiều, thường thêm -s/-es vào danh từ chính (head noun).',
+            noteEx: 'Đúng: "mothers-in-law", "passers-by", "bus stops".',
+            applications: [
+              'In daily vocabulary: "I forgot my umbrella at the coffee shop."',
+              'In pronunciation: Trọng âm chính thường rơi vào từ đứng đầu (CLASSroom).',
+              'In pluralizing compounds: Xác định từ gốc để thêm hậu tố số nhiều.'
+            ],
+            sampleSentence: 'Please turn off the light in the classroom.',
+            correctWord: 'classroom',
+            alt1: 'classrooms is',
+            alt2: 'class-room-s',
+            alt3: 'a classrooms',
+            keyTip: 'ghép từ tạo nghĩa mới, thêm số nhiều ở danh từ chính'
+          },
+          {
+            name: 'Possessive nouns',
+            viSub: 'Danh từ sở hữu',
+            def: 'Possessive nouns (Danh từ sở hữu) là danh từ thêm "\'s" hoặc "\'" để biểu thị quyền sở hữu, mối quan hệ hoặc đặc điểm gắn với người/vật đó.',
+            usage: [
+              'Danh từ số ít hoặc số nhiều không kết thúc bằng -s + "\'s": "This is Minh\'s book."',
+              'Danh từ số nhiều kết thúc bằng -s + "\'": "The teachers\' lounge is on the second floor."',
+              'Chỉ khoảng thời gian hoặc mối quan hệ: "We took a week\'s holiday."'
+            ],
+            structures: [
+              { pattern: 'Singular Noun / Irregular Plural + \'s + Noun', ex: 'Lan\'s bag, children\'s toys' },
+              { pattern: 'Regular Plural Noun (-s) + \' + Noun', ex: 'students\' projects, parents\' meeting' }
+            ],
+            note: 'Với vật vô tri hoặc cấu trúc dài thường dùng "of + Noun" thay vì "\'s".',
+            noteEx: 'Tự nhiên hơn: "the cover of the book" thay vì "the book\'s cover" trong văn trang trọng.',
+            applications: [
+              'In daily talk: "Is this your friend\'s phone?"',
+              'In school/work: "The manager\'s feedback was very clear."',
+              'In punctuation: Đặt dấu nháy đúng vị trí trước/sau chữ s.'
+            ],
+            sampleSentence: 'This is my teacher\'s laptop.',
+            correctWord: 'teacher\'s',
+            alt1: 'teachers\'s',
+            alt2: 'teacher',
+            alt3: 'teachers is',
+            keyTip: 'dùng \'s cho số ít/bất quy tắc và \' cho số nhiều có sẵn -s'
+          }
+        ]
+      },
+      {
+        code: '1.2',
+        en: 'Pronouns',
+        vi: 'Đại từ',
+        intro: 'Từ thay thế cho danh từ hoặc cụm danh từ giúp câu gọn gàng, tránh lặp lại và liên kết chặt chẽ.',
+        subtopics: [
+          {
+            name: 'Personal pronouns',
+            viSub: 'Đại từ nhân xưng chủ ngữ',
+            def: 'Personal pronouns (Đại từ nhân xưng chủ ngữ) gồm I, you, we, they, he, she, it — dùng làm chủ ngữ thực hiện hành động hoặc mang trạng thái trong câu.',
+            usage: [
+              'Đứng trước động từ chính: "She teaches English online."',
+              'Dùng "it" cho vật, thời tiết, thời gian, chủ ngữ giả: "It is raining heavily."',
+              'Dùng "they" khi nói chung chung hoặc số nhiều: "They arrived early this morning."'
+            ],
+            structures: [
+              { pattern: 'Subject Pronoun (I, you, we, they, he, she, it) + Verb', ex: 'We practice speaking every evening.' },
+              { pattern: 'It + be + Adj + to-V / that-clause', ex: 'It is important to review daily.' }
+            ],
+            note: 'Không dùng đại từ tân ngữ (me, him, her) làm chủ ngữ chính trong câu chuẩn.',
+            noteEx: 'Sai: "Me and him went to school." → Đúng: "He and I went to school."',
+            applications: [
+              'In conversation: "I think we should start now."',
+              'In storytelling: "She opened the door and smiled."',
+              'In grammar: Chia động từ phù hợp với ngôi của đại từ.'
+            ],
+            sampleSentence: 'She speaks English very fluently.',
+            correctWord: 'She',
+            alt1: 'Her',
+            alt2: 'Hers',
+            alt3: 'Herself',
+            keyTip: 'đứng làm chủ ngữ trước động từ chính'
+          },
+          {
+            name: 'Object pronouns',
+            viSub: 'Đại từ tân ngữ',
+            def: 'Object pronouns (Đại từ tân ngữ) gồm me, you, us, them, him, her, it — đứng sau động từ hoặc sau giới từ để nhận tác động của hành động.',
+            usage: [
+              'Đứng sau ngoại động từ: "The teacher helped us with the exercise."',
+              'Đứng sau giới từ: "Please send the document to me."',
+              'Dùng sau cụm từ so sánh trang trọng/thông dụng: "He runs faster than me."'
+            ],
+            structures: [
+              { pattern: 'Verb + Object Pronoun', ex: 'Can you call him later?' },
+              { pattern: 'Preposition + Object Pronoun', ex: 'This gift is for you.' }
+            ],
+            note: 'Sau mọi giới từ (for, with, to, between, about...) luôn dùng dạng tân ngữ.',
+            noteEx: 'Sai: "between you and I" (trong chuẩn ngữ pháp) → Đúng: "between you and me".',
+            applications: [
+              'In requests: "Please explain it to me once more."',
+              'In teamwork: "Let\'s work together and support them."',
+              'In listening/reading: Nhận biết đối tượng được nhắc tới.'
+            ],
+            sampleSentence: 'Can you send the file to me?',
+            correctWord: 'me',
+            alt1: 'I',
+            alt2: 'my',
+            alt3: 'mine',
+            keyTip: 'đứng sau động từ hoặc giới từ làm tân ngữ'
+          },
+          {
+            name: 'Possessive pronouns',
+            viSub: 'Đại từ sở hữu',
+            def: 'Possessive pronouns (Đại từ sở hữu) gồm mine, yours, ours, theirs, his, hers — đứng độc lập thay thế cho cụm [tính từ sở hữu + danh từ] để tránh lặp.',
+            usage: [
+              'Làm chủ ngữ: "Mine is on the desk."',
+              'Làm tân ngữ hoặc bổ ngữ sau "to be": "That notebook is hers."',
+              'Dùng trong cấu trúc "of + possessive pronoun": "a friend of mine".'
+            ],
+            structures: [
+              { pattern: 'Possessive Pronoun đứng độc lập (không có Noun theo sau)', ex: 'Your idea is great, and mine is similar.' },
+              { pattern: 'Noun + of + mine/yours/hers/ours/theirs', ex: 'She is a colleague of ours.' }
+            ],
+            note: 'Không viết dấu nháy đơn ở đại từ sở hữu (hers, yours, ours, theirs).',
+            noteEx: 'Sai: "her\'s / your\'s" → Đúng: "hers / yours".',
+            applications: [
+              'In daily talk: "Is this pen yours?" — "Yes, it\'s mine."',
+              'In comparison: "Our results are better than theirs."',
+              'In writing: Tránh lặp lại danh từ đã nhắc trước đó.'
+            ],
+            sampleSentence: 'That bag is hers, not mine.',
+            correctWord: 'hers',
+            alt1: 'her',
+            alt2: 'her\'s',
+            alt3: 'she',
+            keyTip: 'đứng một mình không kèm danh từ phía sau'
+          },
+          {
+            name: 'Reflexive pronouns',
+            viSub: 'Đại từ phản thân',
+            def: 'Reflexive pronouns (Đại từ phản thân) tận cùng bằng -self / -selves (myself, yourself, yourselves, ourselves, themselves, himself, herself, itself), dùng khi chủ ngữ và tân ngữ là cùng một đối tượng hoặc để nhấn mạnh.',
+            usage: [
+              'Hành động tác động ngược lại chủ ngữ: "Be careful not to hurt yourself."',
+              'Nhấn mạnh chính chủ ngữ/tân ngữ: "The director himself signed the letter."',
+              'Cụm "by + reflexive pronoun" = tự mình làm: "She built the website by herself."'
+            ],
+            structures: [
+              { pattern: 'Subject + Verb + Reflexive Pronoun (khi S và O đồng nhất)', ex: 'They enjoyed themselves at the event.' },
+              { pattern: 'by + Reflexive Pronoun', ex: 'I solved the problem by myself.' }
+            ],
+            note: 'Phân biệt số ít (-self) với I/you/he/she/it và số nhiều (-selves) với we/you/they.',
+            noteEx: 'Đúng: "yourself" (1 người) vs. "yourselves" (nhiều người).',
+            applications: [
+              'In self-study: "I test myself with mini-quizzes every week."',
+              'In hospitality/greetings: "Please help yourselves to tea and snacks."',
+              'In writing: Nhấn mạnh tính tự lập hoặc tự thực hiện.'
+            ],
+            sampleSentence: 'He cooked dinner for himself.',
+            correctWord: 'himself',
+            alt1: 'him',
+            alt2: 'hisself',
+            alt3: 'he',
+            keyTip: 'dùng khi chủ ngữ và tân ngữ là một hoặc để nhấn mạnh'
+          },
+          {
+            name: 'Reciprocal pronouns',
+            viSub: 'Đại từ hỗ tương',
+            def: 'Reciprocal pronouns (Đại từ hỗ tương) gồm "each other" và "one another", diễn tả hành động hoặc cảm xúc qua lại giữa hai hay nhiều chủ thể.',
+            usage: [
+              'Tương tác qua lại giữa các thành viên: "They respect each other."',
+              'Thường dùng trong nhóm/cộng đồng: "People should help one another."',
+              'Dạng sở hữu: "They borrowed each other\'s notes."'
+            ],
+            structures: [
+              { pattern: 'Plural Subject + Verb + each other / one another', ex: 'We encourage each other to speak English.' },
+              { pattern: 'each other\'s / one another\'s + Noun', ex: 'They checked each other\'s answers.' }
+            ],
+            note: 'Dùng đại từ hỗ tương khi A tác động lên B và B cũng tác động lên A; khác với đại từ phản thân.',
+            noteEx: 'Đúng: "They looked at each other." (nhìn nhau) khác "They looked at themselves." (tự nhìn mình).',
+            applications: [
+              'In pair/group work: "Students give feedback to each other."',
+              'In teamwork: "Good teammates support one another."',
+              'In grammar: Tránh dùng "each others" có -s ở từ each.'
+            ],
+            sampleSentence: 'Team members support each other every day.',
+            correctWord: 'each other',
+            alt1: 'themselves',
+            alt2: 'each others',
+            alt3: 'one another is',
+            keyTip: 'diễn tả hành động qua lại giữa các đối tượng'
+          },
+          {
+            name: 'Demonstrative pronouns',
+            viSub: 'Đại từ chỉ định',
+            def: 'Demonstrative pronouns (Đại từ chỉ định) gồm this, that, these, those — đứng độc lập làm chủ ngữ hoặc tân ngữ để chỉ định người/vật theo khoảng cách hoặc ngữ cảnh.',
+            usage: [
+              'Chỉ vật gần người nói, số ít: "This is my favorite lesson."',
+              'Chỉ vật xa hoặc ý vừa nhắc tới, số ít: "That sounds like a good idea."',
+              'Chỉ số nhiều gần/xa: "These are useful tips." / "Those were memorable days."'
+            ],
+            structures: [
+              { pattern: 'this / that + Singular Verb', ex: 'This is what I meant.' },
+              { pattern: 'these / those + Plural Verb', ex: 'Those are the questions from the test.' }
+            ],
+            note: 'Khi đứng trực tiếp trước danh từ (this book, those students), từ đó đóng vai trò Determiner, không phải đại từ đứng độc lập.',
+            noteEx: 'Đại từ: "This is easy." — Determiner: "This exercise is easy."',
+            applications: [
+              'In presentations: "This is why visual diagrams work so well."',
+              'In conversation: "That\'s totally true!"',
+              'In agreement: Chia động từ theo số ít/số nhiều của đại từ chỉ định.'
+            ],
+            sampleSentence: 'That sounds like a great plan.',
+            correctWord: 'That',
+            alt1: 'Those',
+            alt2: 'These',
+            alt3: 'Them',
+            keyTip: 'đứng độc lập thay cho danh từ chỉ định, chia theo số ít/nhiều'
+          },
+          {
+            name: 'Relative pronouns',
+            viSub: 'Đại từ quan hệ',
+            def: 'Relative pronouns (Đại từ quan hệ) gồm who, whom, whose, which, that — dùng để nối mệnh đề quan hệ vào danh từ/đại từ đứng trước nhằm bổ sung thông tin.',
+            usage: [
+              'Chỉ người làm chủ ngữ hoặc tân ngữ: "The teacher who helps us is very patient."',
+              'Chỉ sở hữu cho người/vật: "The student whose score improved the most won a prize."',
+              'Chỉ vật/sự việc: "The app which I built runs smoothly on mobile."'
+            ],
+            structures: [
+              { pattern: 'Person + who / whom / whose + Clause', ex: 'The woman who called you is waiting.' },
+              { pattern: 'Thing + which / that / whose + Clause', ex: 'The book which you lent me is useful.' }
+            ],
+            note: 'Không dùng "that" trong mệnh đề quan hệ có dấu phẩy hoặc ngay sau giới từ.',
+            noteEx: 'Đúng: "the person to whom I spoke" hoặc "the person who/that I spoke to".',
+            applications: [
+              'In definitions: "A dictionary is a book which explains word meanings."',
+              'In writing: Ghép hai câu ngắn thành câu phức mượt mà.',
+              'In reading: Xác định mệnh đề bổ nghĩa cho danh từ phía trước.'
+            ],
+            sampleSentence: 'The teacher who helps us is very patient.',
+            correctWord: 'who',
+            alt1: 'which',
+            alt2: 'whose',
+            alt3: 'whom is',
+            keyTip: 'nối mệnh đề quan hệ với danh từ trước nó (who/whom/whose/which/that)'
+          },
+          {
+            name: 'Indefinite pronouns',
+            viSub: 'Đại từ bất định',
+            def: 'Indefinite pronouns (Đại từ bất định) như someone/somebody, anyone/anybody, everyone/everybody, no one/nobody, something, anything, everything, nothing dùng để chỉ người hoặc vật không xác định cụ thể.',
+            usage: [
+              'Câu khẳng định/lời mời/đề nghị: "Someone left a notebook on the table."',
+              'Câu phủ định/nghi vấn: "Did anyone ask about the schedule?"',
+              'Chỉ toàn bộ hoặc không có gì: "Everybody knows the rule." / "Nothing is impossible."'
+            ],
+            structures: [
+              { pattern: 'Indefinite Pronoun (người/vật) + Singular Verb', ex: 'Everyone is ready for the quiz.' },
+              { pattern: 'Indefinite Pronoun + Adjective (tính từ đứng sau)', ex: 'Let\'s find something useful to read.' }
+            ],
+            note: 'Đại từ bất định chỉ người/vật luôn chia động từ số ít, và tính từ bổ nghĩa đứng ngay sau nó.',
+            noteEx: 'Đúng: "something interesting" (không nói "interesting something").',
+            applications: [
+              'In classrooms: "Is there anything unclear about this part?"',
+              'In daily talk: "Nobody answered the phone."',
+              'In grammar tests: Bẫy chia động từ số ít sau everyone/somebody/nothing.'
+            ],
+            sampleSentence: 'Everybody is ready for the lesson.',
+            correctWord: 'Everybody',
+            alt1: 'Everybody are',
+            alt2: 'Interesting something',
+            alt3: 'No ones',
+            keyTip: 'chia động từ số ít và tính từ đứng sau (something new)'
+          }
+        ]
+      },
+      {
+        code: '1.3',
+        en: 'Verbs',
+        vi: 'Động từ',
+        intro: 'Thành phần trung tâm của vị ngữ, biểu thị hành động, quá trình hoặc trạng thái của chủ ngữ.',
+        subtopics: [
+          {
+            name: 'Main verbs',
+            viSub: 'Động từ chính',
+            def: 'Main verbs (Động từ chính) là động từ mang ý nghĩa cốt lõi của mệnh đề, gồm nội động từ (intransitive) và ngoại động từ (transitive).',
+            usage: [
+              'Nội động từ (không cần tân ngữ trực tiếp): "The baby sleeps peacefully."',
+              'Ngoại động từ (cần tân ngữ trực tiếp): "She writes clear summaries."',
+              'Động từ vừa nội vừa ngoại: "He opened the door." / "The door opened."'
+            ],
+            structures: [
+              { pattern: 'Subject + Intransitive Main Verb', ex: 'They arrived early.' },
+              { pattern: 'Subject + Transitive Main Verb + Object', ex: 'We completed the project.' }
+            ],
+            note: 'Một câu hoàn chỉnh cần có động từ chính chia thì làm hạt nhân vị ngữ.',
+            noteEx: 'Sai: "She very smart." → Đúng: "She is very smart."',
+            applications: [
+              'In sentence building: Xác định hành động/trạng thái chính của câu.',
+              'In vocabulary: Phân biệt từ loại (vd: practice [V] vs. practice [N]).',
+              'In writing: Chọn động từ mạnh, chính xác thay vì lạm dụng từ chung chung.'
+            ],
+            sampleSentence: 'They completed the project on time.',
+            correctWord: 'completed',
+            alt1: 'completing',
+            alt2: 'to complete',
+            alt3: 'completion',
+            keyTip: 'mang nghĩa cốt lõi của câu, có thể cần hoặc không cần tân ngữ'
+          },
+          {
+            name: 'Auxiliary verbs',
+            viSub: 'Trợ động từ',
+            def: 'Auxiliary verbs (Trợ động từ) gồm be, do, have — kết hợp với động từ chính để lập thì tiếp diễn/hoàn thành, thể bị động, câu phủ định và câu hỏi.',
+            usage: [
+              'Lập câu hỏi và phủ định ở hiện tại/quá khứ đơn: "Do you review every day?" / "She didn\'t come."',
+              'Lập thì tiếp diễn và bị động: "They are practicing." / "The report was sent."',
+              'Lập thì hoàn thành: "We have finished all ten questions."'
+            ],
+            structures: [
+              { pattern: 'do / does / did + Bare Infinitive (V0)', ex: 'Does he speak English?' },
+              { pattern: 'be + V-ing / V3 ; have/has/had + V3', ex: 'She has learned grammar for two months.' }
+            ],
+            note: 'Sau do/does/did luôn dùng động từ nguyên mẫu không "to" (V0).',
+            noteEx: 'Sai: "Did she went home?" → Đúng: "Did she go home?"',
+            applications: [
+              'In Q&A: Đặt câu hỏi và trả lời ngắn gọn ("Yes, I do.").',
+              'In tenses & passive: Nhận diện thì và thể của câu.',
+              'In error spotting: Kiểm tra dạng động từ đi sau trợ động từ.'
+            ],
+            sampleSentence: 'Do you practice speaking every day?',
+            correctWord: 'Do',
+            alt1: 'Are',
+            alt2: 'Have',
+            alt3: 'Doing',
+            keyTip: 'hỗ trợ lập thì, bị động, phủ định và câu hỏi'
+          },
+          {
+            name: 'Modal verbs',
+            viSub: 'Động từ khuyết thiếu',
+            def: 'Modal verbs (Động từ khuyết thiếu) như can, could, may, might, must, shall, should, will, would, ought to biểu thị khả năng, sự cho phép, nghĩa vụ, lời khuyên hoặc suy đoán.',
+            usage: [
+              'Khả năng / đề nghị: "Can you help me with this exercise?"',
+              'Lời khuyên / nghĩa vụ: "You should sleep early before an exam." / "All visitors must register."',
+              'Suy đoán: "It might rain later this afternoon."'
+            ],
+            structures: [
+              { pattern: 'Modal Verb + Bare Infinitive (V0)', ex: 'She can solve this problem quickly.' },
+              { pattern: 'Modal Verb + not + V0', ex: 'You must not park here.' }
+            ],
+            note: 'Động từ khuyết thiếu không chia -s ở ngôi thứ 3 số ít và không dùng do/does/did để lập phủ định/nghi vấn.',
+            noteEx: 'Sai: "He cans swim." / "Don\'t can" → Đúng: "He can swim." / "cannot".',
+            applications: [
+              'In advice: "You should practice with real examples."',
+              'In polite requests: "Could you please repeat that?"',
+              'In rules: "Students must submit work on time."'
+            ],
+            sampleSentence: 'You should review your notes every day.',
+            correctWord: 'should review',
+            alt1: 'should to review',
+            alt2: 'shoulds review',
+            alt3: 'should reviewing',
+            keyTip: 'luôn theo sau bởi động từ nguyên mẫu không "to", không chia -s'
+          },
+          {
+            name: 'Finite verbs',
+            viSub: 'Động từ chia thì (Hữu hạn)',
+            def: 'Finite verbs (Động từ chia thì) là động từ đã mang dấu hiệu của thì (hiện tại, quá khứ, tương lai) và hòa hợp với chủ ngữ về số/ngôi.',
+            usage: [
+              'Hiện tại đơn chỉ thói quen: "He practices English every evening."',
+              'Quá khứ đơn chỉ hành động đã kết thúc: "They visited the museum last week."',
+              'Đóng vai trò vị ngữ chính của mệnh đề: "The course starts next Monday."'
+            ],
+            structures: [
+              { pattern: 'Subject + Finite Verb (chia theo thì & chủ ngữ)', ex: 'She writes clear notes.' },
+              { pattern: 'Mệnh đề độc lập luôn cần ít nhất 1 Finite Verb', ex: 'We finished the test in thirty minutes.' }
+            ],
+            note: 'Một mệnh đề không thể chỉ gồm danh từ + V-ing hoặc to-V mà thiếu động từ chia thì.',
+            noteEx: 'Sai câu hoàn chỉnh: "The students studying hard." → Đúng: "The students are studying hard."',
+            applications: [
+              'In sentence checking: Đảm bảo mọi mệnh đề đều có động từ chia thì.',
+              'In timeline writing: Chọn thì quá khứ/hiện tại/tương lai cho chuẩn.',
+              'In grammar analysis: Phân biệt động từ chính chia thì với V-ing/to-V.'
+            ],
+            sampleSentence: 'She writes clear notes after each lesson.',
+            correctWord: 'writes',
+            alt1: 'writing',
+            alt2: 'to write',
+            alt3: 'written',
+            keyTip: 'đã được chia theo thì và hòa hợp với chủ ngữ'
+          },
+          {
+            name: 'Non-finite verbs',
+            viSub: 'Động từ bất định (Không chia thì)',
+            def: 'Non-finite verbs (Động từ bất định) là các dạng động từ không biến đổi theo thì hay chủ ngữ, gồm Gerund (V-ing), Infinitive (to-V / V0) và Participle (V-ing / V3).',
+            usage: [
+              'Gerund (V-ing) làm chủ ngữ hoặc sau giới từ: "Reading is good for your mind." / "interested in learning".',
+              'To-infinitive chỉ mục đích hoặc sau động từ muốn/quyết định: "She decided to join the club."',
+              'Participle làm tính từ/rút gọn: "a broken window", "the boy sitting near the door".'
+            ],
+            structures: [
+              { pattern: 'V-ing (Gerund / Present Participle)', ex: 'Swimming helps build stamina.' },
+              { pattern: 'to + V0 (Infinitive) / V3 (Past Participle)', ex: 'I want to improve my vocabulary.' }
+            ],
+            note: 'Non-finite verb không tự đứng làm vị ngữ chính nếu không có động từ chia thì đi kèm.',
+            noteEx: 'Sai: "To learn English very useful." → Đúng: "Learning English is very useful."',
+            applications: [
+              'In writing: Dùng V-ing sau giới từ hoặc to-V chỉ mục đích.',
+              'In reading: Nhận diện cụm phân từ rút gọn mệnh đề.',
+              'In verb patterns: Phân biệt động từ theo sau bởi V-ing hay to-V.'
+            ],
+            sampleSentence: 'Reading every day helps expand your vocabulary.',
+            correctWord: 'Reading',
+            alt1: 'Read',
+            alt2: 'Reads',
+            alt3: 'To reading',
+            keyTip: 'không chia theo thì/ngôi (gồm V-ing, to-V, V3/Participle)'
+          }
+        ]
+      },
+      {
+        code: '1.4',
+        en: 'Adjectives',
+        vi: 'Tính từ',
+        intro: 'Từ miêu tả đặc điểm, tính chất, trạng thái hoặc mức độ của danh từ hay đại từ.',
+        subtopics: [
+          {
+            name: 'Position of adjectives',
+            viSub: 'Vị trí của tính từ',
+            def: 'Position of adjectives (Vị trí của tính từ) quy định tính từ đứng trước danh từ (định ngữ), sau động từ nối (vị ngữ) hoặc sau tân ngữ.',
+            usage: [
+              'Đứng trước danh từ: "She has a creative idea."',
+              'Đứng sau linking verb (be, seem, look, feel, sound, smell, taste, become, get): "The lesson seems clear."',
+              'Đứng sau tân ngữ trong cấu trúc make/keep/find + O + Adj: "Please keep the room tidy."'
+            ],
+            structures: [
+              { pattern: 'Adj + Noun', ex: 'a helpful guide' },
+              { pattern: 'Subject + Linking Verb + Adj', ex: 'He feels confident.' }
+            ],
+            note: 'Sau động từ chỉ giác quan/trạng thái như look, feel, sound, smell, taste dùng tính từ chứ không dùng trạng từ.',
+            noteEx: 'Đúng: "The soup tastes good." (không nói "tastes well" khi chỉ vị món ăn).',
+            applications: [
+              'In descriptions: Miêu tả người, vật, cảm xúc chính xác.',
+              'In speaking: Nói cảm nhận tự nhiên ("I feel ready.").',
+              'In grammar tests: Nhận biết chỗ trống sau linking verb cần tính từ.'
+            ],
+            sampleSentence: 'She looks confident during the presentation.',
+            correctWord: 'confident',
+            alt1: 'confidently',
+            alt2: 'confidence',
+            alt3: 'confide',
+            keyTip: 'đứng trước danh từ hoặc sau động từ nối (be, look, feel, seem...)'
+          },
+          {
+            name: 'Order of adjectives',
+            viSub: 'Trật tự tính từ (OSASCOMP)',
+            def: 'Order of adjectives (Trật tự tính từ) là quy tắc sắp xếp nhiều tính từ cùng bổ nghĩa cho một danh từ theo thứ tự: Opinion → Size → Age → Shape → Color → Origin → Material → Purpose.',
+            usage: [
+              'Ý kiến + Cỡ + Hình dáng: "a lovely small round box"',
+              'Tuổi + Màu sắc + Nguồn gốc: "an old brown Italian leather bag"',
+              'Màu sắc + Chất liệu + Mục đích: "a black cotton running shirt"'
+            ],
+            structures: [
+              { pattern: 'Opinion → Size → Age → Shape → Color → Origin → Material → Purpose + Noun', ex: 'a nice small new square blue Japanese plastic container' }
+            ],
+            note: 'Ít khi dùng quá 2–3 tính từ liên tiếp trong một câu tự nhiên; luôn ưu tiên ý kiến và kích thước trước màu sắc và chất liệu.',
+            noteEx: 'Đúng: "a cute little red bag" — Ít tự nhiên: "a red little cute bag".',
+            applications: [
+              'In descriptive writing: Miêu tả đồ vật, trang phục, không gian.',
+              'In multiple-choice grammar: Chọn đúng thứ tự tính từ trước danh từ.',
+              'In memorization: Nhớ nhanh bộ khung OSASCOMP.'
+            ],
+            sampleSentence: 'She bought a cute little red bag.',
+            correctWord: 'cute little red',
+            alt1: 'red little cute',
+            alt2: 'little cute red',
+            alt3: 'red cute little',
+            keyTip: 'Opinion → Size → Age → Shape → Color → Origin → Material → Purpose'
+          },
+          {
+            name: 'Compound adjectives',
+            viSub: 'Tính từ ghép',
+            def: 'Compound adjectives (Tính từ ghép) là tính từ do hai hoặc nhiều từ ghép lại (thường nối bằng dấu gạch nối "-") để cùng bổ nghĩa cho một danh từ.',
+            usage: [
+              'Tính chất/tác phong: "well-known, hard-working, open-minded"',
+              'Số lượng + đơn vị thời gian/đo lường đứng trước danh từ: "a five-year-old boy", "a ten-minute break"',
+              'Danh từ/tính từ + phân từ: "English-speaking countries", "time-saving tools"'
+            ],
+            structures: [
+              { pattern: '[Number - Singular Noun] + Main Noun', ex: 'a three-day trip, a two-hour meeting' },
+              { pattern: 'Adv / Adj / Noun + V-ing / V3 + Noun', ex: 'well-prepared students, record-breaking results' }
+            ],
+            note: 'Danh từ chỉ đơn vị trong tính từ ghép đứng trước danh từ luôn ở dạng SỐ ÍT, không thêm -s.',
+            noteEx: 'Sai: "a five-years-old boy" → Đúng: "a five-year-old boy".',
+            applications: [
+              'In concise writing: Gộp cụm dài thành tính từ ghép gọn gàng.',
+              'In TOEIC/IELTS: Gặp nhiều trong quảng cáo, mô tả sản phẩm, sự kiện.',
+              'In proofreading: Kiểm tra không thêm -s ở danh từ đơn vị trong cụm ghép.'
+            ],
+            sampleSentence: 'We had a ten-minute break between sessions.',
+            correctWord: 'ten-minute',
+            alt1: 'ten-minutes',
+            alt2: 'ten minutes',
+            alt3: 'tens-minute',
+            keyTip: 'thường có dấu gạch nối, danh từ đơn vị đi kèm luôn ở số ít'
+          }
+        ]
+      },
+      {
+        code: '1.5',
+        en: 'Adverbs',
+        vi: 'Trạng từ',
+        intro: 'Từ bổ sung thông tin về cách thức, tần suất, mức độ, thời gian, nơi chốn hoặc thái độ cho động từ, tính từ, trạng từ khác hoặc cả câu.',
+        subtopics: [
+          {
+            name: 'Manner',
+            viSub: 'Trạng từ chỉ cách thức',
+            def: 'Adverbs of manner (Trạng từ chỉ cách thức) cho biết hành động diễn ra như thế nào (trả lời câu hỏi "How?"), thường tạo bằng cách thêm -ly vào tính từ.',
+            usage: [
+              'Thêm -ly vào tính từ: "carefully, clearly, slowly, politely"',
+              'Trạng từ bất quy tắc giống tính từ: "He works hard." / "She runs fast."',
+              'Đứng sau động từ hoặc sau tân ngữ: "He explained the rule clearly."'
+            ],
+            structures: [
+              { pattern: 'Verb + Adverb of Manner', ex: 'She speaks clearly.' },
+              { pattern: 'Verb + Object + Adverb of Manner', ex: 'They finished the task quickly.' }
+            ],
+            note: 'Phân biệt "hard" (chăm chỉ/cật lực) với "hardly" (hầu như không); "good" là tính từ, "well" là trạng từ.',
+            noteEx: 'Đúng: "He plays tennis well." (không nói "plays tennis good").',
+            applications: [
+              'In speaking: Miêu tả cách làm việc hoặc giao tiếp.',
+              'In instructions: "Read the instructions carefully."',
+              'In grammar: Chọn trạng từ thay vì tính từ để bổ nghĩa cho động từ thường.'
+            ],
+            sampleSentence: 'He explained the grammar rule clearly.',
+            correctWord: 'clearly',
+            alt1: 'clear',
+            alt2: 'clearness',
+            alt3: 'more clearly than',
+            keyTip: 'chỉ cách thức ("How?"), thường đứng sau động từ/tân ngữ'
+          },
+          {
+            name: 'Frequency',
+            viSub: 'Trạng từ chỉ tần suất',
+            def: 'Adverbs of frequency (Trạng từ chỉ tần suất) diễn tả mức độ thường xuyên của hành động: always, usually, often, sometimes, rarely, seldom, hardly ever, never.',
+            usage: [
+              'Đứng trước động từ thường: "I usually review vocabulary at night."',
+              'Đứng sau "to be" và trợ động từ: "She is always on time." / "He has never been there."',
+              'Dùng với thì hiện tại đơn để diễn tả thói quen.'
+            ],
+            structures: [
+              { pattern: 'Subject + Frequency Adverb + Main Verb', ex: 'We often practice together.' },
+              { pattern: 'Subject + be / Aux + Frequency Adverb', ex: 'They are rarely late.' }
+            ],
+            note: 'Các trạng từ như never, rarely, seldom, hardly ever đã mang sắc thái phủ định nên không dùng thêm "not" trong cùng mệnh đề.',
+            noteEx: 'Sai: "I don\'t never skip class." → Đúng: "I never skip class."',
+            applications: [
+              'In routines: Nói về thói quen học tập và sinh hoạt hằng ngày.',
+              'In surveys/interviews: Trả lời câu hỏi "How often...?".',
+              'In word order: Đặt đúng vị trí trước động từ thường hoặc sau "to be".'
+            ],
+            sampleSentence: 'She always arrives on time for class.',
+            correctWord: 'always',
+            alt1: 'always is',
+            alt2: 'not always never',
+            alt3: 'never not',
+            keyTip: 'trước động từ thường, sau "to be"/trợ động từ; never/rarely mang nghĩa phủ định'
+          },
+          {
+            name: 'Degree',
+            viSub: 'Trạng từ chỉ mức độ',
+            def: 'Adverbs of degree (Trạng từ chỉ mức độ) cho biết mức độ mạnh yếu hoặc vừa đủ của tính từ, trạng từ hoặc động từ: very, too, so, quite, rather, fairly, extremely, enough.',
+            usage: [
+              'Tăng cường mức độ: "The explanation is very clear." / "extremely helpful".',
+              'Quá mức (thường tiêu cực/không thể): "The box is too heavy to lift."',
+              'Đủ mức với "enough": "She speaks English well enough to present."'
+            ],
+            structures: [
+              { pattern: 'very / so / too / quite + Adj / Adv', ex: 'It is quite easy to follow.' },
+              { pattern: 'Adj / Adv + enough (+ to-V)', ex: 'He is old enough to understand.' }
+            ],
+            note: '"enough" đứng SAU tính từ/trạng từ nhưng đứng TRƯỚC danh từ.',
+            noteEx: 'Đúng: "good enough" (tính từ + enough) vs. "enough time" (enough + danh từ).',
+            applications: [
+              'In feedback: Đánh giá mức độ khó/dễ hoặc hiệu quả.',
+              'In everyday speech: "I\'m too tired to go out tonight."',
+              'In sentence patterns: Dùng "too... to..." hoặc "...enough to...".'
+            ],
+            sampleSentence: 'The test was quite easy for well-prepared learners.',
+            correctWord: 'quite',
+            alt1: 'enough quite',
+            alt2: 'too much easy',
+            alt3: 'very muchly',
+            keyTip: 'chỉ mức độ; enough đứng sau Adj/Adv và trước Noun'
+          },
+          {
+            name: 'Time',
+            viSub: 'Trạng từ chỉ thời gian',
+            def: 'Adverbs of time (Trạng từ chỉ thời gian) chỉ thời điểm hoặc trình tự thời gian của sự việc: now, today, tomorrow, yesterday, soon, recently, already, yet, then.',
+            usage: [
+              'Nêu thời điểm cụ thể hoặc tương đối: "We will meet tomorrow."',
+              'Dùng với thì hiện tại hoàn thành: "Have you finished your homework yet?" / "I have already read it."',
+              'Đứng cuối câu hoặc đầu câu khi nhấn mạnh: "Recently, online learning has grown fast."'
+            ],
+            structures: [
+              { pattern: 'Clause + Adverb of Time (cuối câu)', ex: 'They arrived yesterday.' },
+              { pattern: 'Adverb of Time, + Clause (đầu câu)', ex: 'Today, we focus on grammar.' }
+            ],
+            note: '"yet" thường đứng ở cuối câu phủ định hoặc câu hỏi; "already" thường dùng trong câu khẳng định hoặc câu hỏi ngạc nhiên.',
+            noteEx: 'Đúng: "I haven\'t seen him yet."',
+            applications: [
+              'In schedules: Xác định mốc thời gian diễn ra hành động.',
+              'In tense selection: Gợi ý thì quá khứ đơn, hiện tại hoàn thành hoặc tương lai.',
+              'In daily communication: "Let\'s start right now."'
+            ],
+            sampleSentence: 'Have you finished the practice exercises yet?',
+            correctWord: 'yet',
+            alt1: 'already not',
+            alt2: 'yesterday now',
+            alt3: 'ever since then ago',
+            keyTip: 'chỉ thời điểm/trình tự ("When?"), hỗ trợ chọn thì đúng'
+          },
+          {
+            name: 'Place',
+            viSub: 'Trạng từ chỉ nơi chốn',
+            def: 'Adverbs of place (Trạng từ chỉ nơi chốn) chỉ vị trí hoặc hướng nơi chốn diễn ra hành động (trả lời câu hỏi "Where?"): here, there, outside, inside, upstairs, downstairs, everywhere, abroad.',
+            usage: [
+              'Chỉ vị trí/hướng: "Please come here." / "They moved abroad last year."',
+              'Thường đứng sau động từ chính hoặc sau tân ngữ: "She looked everywhere for her keys."',
+              'Kết hợp với trạng từ thời gian theo thứ tự Place trước Time.'
+            ],
+            structures: [
+              { pattern: 'Verb (+ Object) + Adverb of Place', ex: 'Go upstairs and wait.' },
+              { pattern: 'Place + Time (khi cả hai cùng xuất hiện)', ex: 'We studied at home yesterday.' }
+            ],
+            note: 'Khi câu có cả trạng từ nơi chốn và trạng từ thời gian, ưu tiên đặt nơi chốn trước thời gian.',
+            noteEx: 'Đúng: "She went there yesterday." (không nói "went yesterday there").',
+            applications: [
+              'In directions: Hướng dẫn vị trí hoặc di chuyển.',
+              'In travel/study plans: "She plans to study abroad next year."',
+              'In word order: Giữ trật tự Place → Time.'
+            ],
+            sampleSentence: 'Please wait outside the classroom.',
+            correctWord: 'outside',
+            alt1: 'outside to',
+            alt2: 'there is outside',
+            alt3: 'herely',
+            keyTip: 'chỉ nơi chốn ("Where?"), đứng trước trạng từ thời gian khi đi cùng'
+          },
+          {
+            name: 'Sentence adverbs',
+            viSub: 'Trạng từ cả câu / Trạng từ tình thái',
+            def: 'Sentence adverbs (Trạng từ cả câu) là trạng từ đứng đầu câu (thường có dấu phẩy) hoặc tách biệt để thể hiện thái độ, đánh giá hoặc liên kết của người nói đối với toàn bộ câu.',
+            usage: [
+              'Thể hiện đánh giá/cảm xúc: "Fortunately, nobody was injured." / "Honestly, I prefer short lessons."',
+              'Xác nhận thực tế/sự thật: "Actually, the rule is quite simple."',
+              'Nối mạch logic toàn câu: "However, we need more data."'
+            ],
+            structures: [
+              { pattern: 'Sentence Adverb, + Full Clause', ex: 'Fortunately, we caught the early bus.' },
+              { pattern: 'Subject, + Sentence Adverb, + Verb...', ex: 'This method, honestly, saves a lot of time.' }
+            ],
+            note: 'Sentence adverb bổ nghĩa cho cả mệnh đề/câu chứ không chỉ riêng một từ.',
+            noteEx: 'Đúng: "Fortunately, it didn\'t rain." (May mắn thay là trời không mưa).',
+            applications: [
+              'In speaking/opinion: Thể hiện quan điểm tự nhiên, lịch sự.',
+              'In essays/reports: Làm rõ thái độ hoặc bước chuyển ý.',
+              'In punctuation: Thường đi kèm dấu phẩy tách biệt rõ ràng.'
+            ],
+            sampleSentence: 'Fortunately, we arrived before the rain started.',
+            correctWord: 'Fortunately',
+            alt1: 'Fortunate',
+            alt2: 'Fortune',
+            alt3: 'Fortunateness',
+            keyTip: 'bổ nghĩa cho cả câu, thường đứng đầu câu kèm dấu phẩy'
+          }
+        ]
+      },
+      {
+        code: '1.6',
+        en: 'Prepositions',
+        vi: 'Giới từ',
+        intro: 'Từ nối danh từ, đại từ hoặc cụm danh từ (hoặc V-ing) với phần còn lại của câu để chỉ thời gian, nơi chốn, hướng chuyển động hoặc quan hệ ngữ pháp.',
+        subtopics: [
+          {
+            name: 'Time',
+            viSub: 'Giới từ chỉ thời gian',
+            def: 'Prepositions of time (Giới từ chỉ thời gian) biểu thị mốc giờ, ngày tháng, khoảng thời gian hoặc giai đoạn diễn ra sự việc — phổ biến nhất là at, on, in.',
+            usage: [
+              'AT: giờ cụ thể, thời điểm ngắn, lễ/bữa ăn: "at 7:30 AM, at night, at noon, at weekend".',
+              'ON: ngày cụ thể, thứ trong tuần, ngày tháng: "on Monday, on August 20th, on my birthday".',
+              'IN: tháng, năm, mùa, thập kỷ, buổi trong ngày: "in November, in 2026, in the morning".'
+            ],
+            structures: [
+              { pattern: 'at + clock time / night / noon', ex: 'Class begins at 8:00 AM.' },
+              { pattern: 'on + day / date ; in + month / year / period', ex: 'We meet on Fridays in the evening.' }
+            ],
+            note: 'Không dùng at/on/in trước các cụm có "this, next, last, every" + thời gian.',
+            noteEx: 'Sai: "on next Monday" → Đúng: "next Monday".',
+            applications: [
+              'In scheduling: Đặt lịch học, lịch hẹn, thời hạn nộp bài.',
+              'In invitations/emails: Ghi rõ ngày giờ sự kiện.',
+              'In grammar tests: Phân tầng độ rộng thời gian at → on → in.'
+            ],
+            sampleSentence: 'Our class starts at 7:30 PM on Mondays.',
+            correctWord: 'at 7:30 PM on Mondays',
+            alt1: 'in 7:30 PM at Mondays',
+            alt2: 'on 7:30 PM in Mondays',
+            alt3: 'at Mondays in 7:30 PM',
+            keyTip: 'at (giờ/điểm mốc), on (thứ/ngày), in (tháng/năm/mùa/buổi)'
+          },
+          {
+            name: 'Place',
+            viSub: 'Giới từ chỉ nơi chốn',
+            def: 'Prepositions of place (Giới từ chỉ nơi chốn) xác định vị trí tương đối hoặc không gian của người/vật: at, on, in, under, above, below, next to, behind, in front of, between.',
+            usage: [
+              'AT: điểm/địa điểm cụ thể hoặc chức năng: "at the bus stop, at school, at the door".',
+              'ON: trên bề mặt hoặc đường phố: "on the table, on the wall, on Nguyen Hue Street".',
+              'IN: bên trong không gian khép kín hoặc khu vực rộng: "in the bag, in the room, in Vietnam".'
+            ],
+            structures: [
+              { pattern: 'at + specific point/venue', ex: 'She is waiting at the entrance.' },
+              { pattern: 'on + surface/street ; in + enclosed area/city/country', ex: 'The book is on the desk in my room.' }
+            ],
+            note: 'Phân biệt "in" (bên trong không gian) và "on" (tiếp xúc trên bề mặt).',
+            noteEx: 'Đúng: "a picture on the wall" vs. "a bird in the cage".',
+            applications: [
+              'In daily descriptions: Chỉ vị trí đồ vật hoặc địa điểm.',
+              'In reading comprehension: Xác định bối cảnh không gian.',
+              'In speaking: Mô tả phòng học, văn phòng, bản đồ.'
+            ],
+            sampleSentence: 'The notebook is on the desk in my room.',
+            correctWord: 'on',
+            alt1: 'at on',
+            alt2: 'in to',
+            alt3: 'on at',
+            keyTip: 'at (điểm/địa điểm), on (bề mặt/đường), in (không gian/khu vực)'
+          },
+          {
+            name: 'Movement',
+            viSub: 'Giới từ chỉ sự chuyển động',
+            def: 'Prepositions of movement (Giới từ chỉ sự chuyển động) diễn tả hướng di chuyển từ vị trí này sang vị trí khác: to, into, onto, out of, across, through, along, towards.',
+            usage: [
+              'Di chuyển đến đích / đi vào trong / ra ngoài: "go to school, walk into the room, come out of the building".',
+              'Di chuyển lên bề mặt / ngang qua / xuyên qua: "jump onto the stage, walk across the street, walk through the park".',
+              'Di chuyển dọc theo hoặc hướng về phía: "walk along the river, head towards the station".'
+            ],
+            structures: [
+              { pattern: 'Motion Verb + into / onto / out of / across / through + Noun', ex: 'He walked into the meeting room.' }
+            ],
+            note: 'Thường đi kèm động từ chỉ chuyển động (go, walk, run, move, drive, fly).',
+            noteEx: 'Đúng: "walk across the bridge" (băng qua cầu) vs. "walk through the tunnel" (đi xuyên qua hầm).',
+            applications: [
+              'In directions: Chỉ đường đi từng bước.',
+              'In storytelling: Miêu tả diễn biến hành động di chuyển.',
+              'In vocabulary: Phân biệt sắc thái into / onto / out of / across / through.'
+            ],
+            sampleSentence: 'She walked into the room and sat down.',
+            correctWord: 'into',
+            alt1: 'onto at',
+            alt2: 'through to',
+            alt3: 'across in',
+            keyTip: 'chỉ hướng di chuyển (to, into, onto, out of, across, through...)'
+          },
+          {
+            name: 'Dependent prepositions',
+            viSub: 'Giới từ phụ thuộc',
+            def: 'Dependent prepositions (Giới từ phụ thuộc) là giới từ đi kèm cố định sau một số tính từ, danh từ hoặc động từ nhất định để hoàn chỉnh nghĩa và cấu trúc.',
+            usage: [
+              'Tính từ + giới từ: "interested in, good at, afraid of, proud of, responsible for, famous for".',
+              'Động từ + giới từ: "depend on, listen to, wait for, apologize for, succeed in".',
+              'Danh từ + giới từ: "reason for, solution to, increase in, advantage of".'
+            ],
+            structures: [
+              { pattern: 'Adj / Verb / Noun + Fixed Preposition + Noun / V-ing', ex: 'She is interested in learning English.' }
+            ],
+            note: 'Khi động từ theo sau giới từ phụ thuộc, luôn chia dạng V-ing.',
+            noteEx: 'Sai: "She is good at speak." → Đúng: "She is good at speaking."',
+            applications: [
+              'In profiles/CV: "I am responsible for training new learners."',
+              'In grammar exams: Dạng bài điền giới từ sau tính từ/động từ/danh từ.',
+              'In writing: Dùng cụm cố định chuẩn xác.'
+            ],
+            sampleSentence: 'She is interested in improving her English.',
+            correctWord: 'in',
+            alt1: 'on',
+            alt2: 'at',
+            alt3: 'for',
+            keyTip: 'đi cố định sau từ nhất định và theo sau bởi Noun hoặc V-ing'
+          }
+        ]
+      },
+      {
+        code: '1.7',
+        en: 'Conjunctions',
+        vi: 'Liên từ',
+        intro: 'Từ nối các từ, cụm từ hoặc mệnh đề nhằm thể hiện mối quan hệ bổ sung, tương phản, nguyên nhân – kết quả, điều kiện hoặc thời gian.',
+        subtopics: [
+          {
+            name: 'Coordinating',
+            viSub: 'Liên từ kết hợp',
+            def: 'Coordinating conjunctions (Liên từ kết hợp — FANBOYS: for, and, nor, but, or, yet, so) nối các đơn vị ngôn ngữ ngang hàng nhau như hai từ, hai cụm từ hoặc hai mệnh đề độc lập.',
+            usage: [
+              'Bổ sung/tiếp nối: "I read the guide and took notes."',
+              'Tương phản: "The task was difficult, but we finished it."',
+              'Lựa chọn hoặc kết quả: "We can meet today or tomorrow." / "It rained, so we stayed home."'
+            ],
+            structures: [
+              { pattern: 'Independent Clause 1, + FANBOYS + Independent Clause 2', ex: 'She wanted to join, but she had another class.' },
+              { pattern: 'Word/Phrase 1 + and/but/or + Word/Phrase 2', ex: 'tea or coffee' }
+            ],
+            note: 'Khi nối hai mệnh đề độc lập, thường dùng dấu phẩy đứng trước liên từ kết hợp.',
+            noteEx: 'Đúng: "I studied hard, so I felt confident."',
+            applications: [
+              'In compound sentences: Tạo câu ghép rõ ràng, dễ đọc.',
+              'In everyday talk: Nối ý nhanh và tự nhiên.',
+              'In editing: Tránh câu chạy dài (run-on sentence).'
+            ],
+            sampleSentence: 'I wanted to go out, but I had to finish my work.',
+            correctWord: 'but',
+            alt1: 'but so',
+            alt2: 'or because',
+            alt3: 'so but',
+            keyTip: 'nối thành phần ngang hàng (FANBOYS), có dấu phẩy trước khi nối 2 mệnh đề độc lập'
+          },
+          {
+            name: 'Subordinating',
+            viSub: 'Liên từ phụ thuộc',
+            def: 'Subordinating conjunctions (Liên từ phụ thuộc) như because, since, as, although, though, even though, when, while, before, after, until, if, unless mở đầu mệnh đề phụ thuộc và gắn với mệnh đề chính.',
+            usage: [
+              'Nguyên nhân: "We stayed home because it was raining."',
+              'Nhượng bộ/tương phản: "Although she was tired, she kept practicing."',
+              'Thời gian / điều kiện: "Call me when you arrive." / "You will pass if you practice."'
+            ],
+            structures: [
+              { pattern: 'Subordinating Conjunction + S1 + V1, + S2 + V2', ex: 'Although it rained, they went out.' },
+              { pattern: 'S2 + V2 + Subordinating Conjunction + S1 + V1', ex: 'They went out although it rained.' }
+            ],
+            note: 'Không dùng "although" đi cùng "but" trong cùng một câu; sau because/although là mệnh đề (S + V).',
+            noteEx: 'Sai: "Although it rained, but we went out." → Đúng: "Although it rained, we went out."',
+            applications: [
+              'In complex sentences: Nêu lý do, điều kiện, thời điểm, sự tương phản.',
+              'In essays/speaking: Tăng chiều sâu lập luận và liên kết.',
+              'In grammar tests: Phân biệt liên từ + mệnh đề với giới từ + cụm danh từ.'
+            ],
+            sampleSentence: 'Although she was tired, she finished the lesson.',
+            correctWord: 'Although',
+            alt1: 'Despite',
+            alt2: 'Because of',
+            alt3: 'Although but',
+            keyTip: 'mở đầu mệnh đề phụ thuộc (S + V), có dấu phẩy khi mệnh đề phụ đứng đầu'
+          },
+          {
+            name: 'Correlative',
+            viSub: 'Liên từ tương quan',
+            def: 'Correlative conjunctions (Liên từ tương quan) là các cặp liên từ đi đôi với nhau như both... and..., either... or..., neither... nor..., not only... but also... để nối hai thành phần tương đương.',
+            usage: [
+              'Cả hai đều đúng: "Both Minh and Lan enjoy learning English."',
+              'Một trong hai: "We can study either today or tomorrow."',
+              'Cả hai đều không / không chỉ... mà còn: "Neither the teacher nor the students were late." / "Not only does she read, but she also writes."'
+            ],
+            structures: [
+              { pattern: 'both A and B (luôn chia động từ số nhiều)', ex: 'Both grammar and vocabulary matter.' },
+              { pattern: 'either A or B / neither A nor B / not only A but also B', ex: 'Neither the manager nor the staff agreed.' }
+            ],
+            note: 'Với either...or, neither...nor, not only...but also, động từ thường hòa hợp với chủ ngữ gần động từ nhất.',
+            noteEx: 'Đúng: "Neither the teacher nor the students are here."',
+            applications: [
+              'In persuasive writing: Nhấn mạnh hai yếu tố song hành.',
+              'In choices/options: Trình bày hai lựa chọn rõ ràng.',
+              'In subject-verb agreement: Xác định chủ ngữ gần động từ nhất.'
+            ],
+            sampleSentence: 'Both practice and feedback are essential.',
+            correctWord: 'Both ... and',
+            alt1: 'Both ... or',
+            alt2: 'Neither ... or',
+            alt3: 'Not only ... or',
+            keyTip: 'đi theo cặp cố định; both...and luôn số nhiều'
+          }
+        ]
+      },
+      {
+        code: '1.8',
+        en: 'Determiners',
+        vi: 'Từ hạn định',
+        intro: 'Từ đứng trước danh từ hoặc cụm danh từ để xác định tính xác định, sở hữu, số lượng hoặc vị trí của danh từ đó.',
+        subtopics: [
+          {
+            name: 'Articles',
+            viSub: 'Mạo từ (a, an, the)',
+            def: 'Articles (Mạo từ) gồm mạo từ bất định "a / an" và mạo từ xác định "the", đứng trước danh từ để biểu thị danh từ đó chưa xác định hay đã xác định.',
+            usage: [
+              'A / AN: danh từ đếm được số ít nhắc lần đầu hoặc chưa xác định: "I saw a bird." / "She is an engineer."',
+              'THE: danh từ đã được nhắc đến, duy nhất hoặc cả người nói lẫn người nghe đều biết: "The bird was singing." / "the sun".',
+              'Không dùng mạo từ khi nói chung chung về danh từ số nhiều/không đếm được: "Books are valuable."'
+            ],
+            structures: [
+              { pattern: 'a / an + Singular Countable Noun', ex: 'a book, an apple' },
+              { pattern: 'the + Singular / Plural / Uncountable Noun (xác định)', ex: 'the book on the table, the water in the glass' }
+            ],
+            note: 'Dùng "an" trước âm nguyên âm khi đọc, không phụ thuộc chữ cái đầu.',
+            noteEx: 'Đúng: "an hour" (âm /aʊ/), "a university" (âm /juː/).',
+            applications: [
+              'In everyday sentences: Phân biệt lần đầu nhắc tới và đã xác định.',
+              'In writing: Tránh thiếu mạo từ trước danh từ đếm được số ít.',
+              'In reading/tests: Dấu hiệu nhận biết danh từ đã được xác định trước đó.'
+            ],
+            sampleSentence: 'I saw a bird; the bird was small.',
+            correctWord: 'the bird',
+            alt1: 'a bird (lần 2)',
+            alt2: 'an bird',
+            alt3: 'few bird',
+            keyTip: 'a/an (chưa xác định, số ít), the (đã xác định / duy nhất)'
+          },
+          {
+            name: 'Demonstratives',
+            viSub: 'Từ hạn định chỉ định',
+            def: 'Demonstrative determiners (Từ hạn định chỉ định) gồm this, that, these, those — đứng trực tiếp trước danh từ để chỉ định khoảng cách hoặc đối tượng cụ thể.',
+            usage: [
+              'Chỉ vật gần, số ít: "This lesson is easy to follow."',
+              'Chỉ vật xa, số ít: "That building is new."',
+              'Chỉ số nhiều gần/xa: "These exercises are helpful." / "Those students arrived early."'
+            ],
+            structures: [
+              { pattern: 'this / that + Singular Noun', ex: 'this chapter, that question' },
+              { pattern: 'these / those + Plural Noun', ex: 'these notes, those examples' }
+            ],
+            note: 'Luôn có danh từ theo sau (khác đại từ chỉ định đứng độc lập).',
+            noteEx: 'Đúng: "these exercises" (số nhiều) vs. "this exercise" (số ít).',
+            applications: [
+              'In teaching/presenting: Chỉ thẳng vào slide, ví dụ hoặc bài tập.',
+              'In conversation: "Please read these sentences aloud."',
+              'In grammar: Đồng bộ số ít/số nhiều giữa từ chỉ định và danh từ.'
+            ],
+            sampleSentence: 'Please complete these exercises before class.',
+            correctWord: 'these',
+            alt1: 'this',
+            alt2: 'much',
+            alt3: 'an',
+            keyTip: 'đứng trực tiếp trước danh từ, hòa hợp số ít (this/that) và số nhiều (these/those)'
+          },
+          {
+            name: 'Quantifiers',
+            viSub: 'Lượng từ / Từ chỉ số lượng',
+            def: 'Quantifiers (Lượng từ) là từ hạn định chỉ số lượng hoặc mức độ của danh từ: some, any, no, many, much, a few, few, a little, little, several, all, both, each, every.',
+            usage: [
+              'many / (a) few + danh từ đếm được số nhiều: "many books", "a few minutes".',
+              'much / (a) little + danh từ không đếm được: "much time", "a little water".',
+              'some (thường khẳng định/lời mời) vs. any (phủ định/câu hỏi): "Do you have any questions?"'
+            ],
+            structures: [
+              { pattern: 'many / a few / few / several + Plural Countable Noun', ex: 'a few mistakes' },
+              { pattern: 'much / a little / little + Uncountable Noun', ex: 'a little progress' }
+            ],
+            note: '"a few / a little" mang sắc thái tích cực (có một chút/một vài); "few / little" mang sắc thái gần như không có/thiếu.',
+            noteEx: 'Đúng: "I have a few ideas." (có vài ý tưởng) vs. "I have few ideas." (rất ít ý tưởng).',
+            applications: [
+              'In feedback/surveys: Mô tả mức độ hoặc số lượng chính xác.',
+              'In grammar tests: Phân biệt countable vs. uncountable qua lượng từ.',
+              'In daily talk: "We still have a little time left."'
+            ],
+            sampleSentence: 'There are a few mistakes left in your draft.',
+            correctWord: 'a few',
+            alt1: 'a little (với mistakes)',
+            alt2: 'much (với mistakes)',
+            alt3: 'an few',
+            keyTip: 'many/few cho đếm được số nhiều; much/little cho không đếm được'
+          },
+          {
+            name: 'Possessives',
+            viSub: 'Tính từ sở hữu (Determiner)',
+            def: 'Possessive determiners (Tính từ sở hữu) gồm my, your, his, her, its, our, their — luôn đứng trước danh từ để chỉ quyền sở hữu hoặc mối quan hệ.',
+            usage: [
+              'Đứng trước danh từ: "This is my workbook." / "She forgot her keys."',
+              'Dùng "its" cho vật/tổ chức: "The company updated its policy."',
+              'Dùng "their" cho số nhiều: "Students submitted their assignments."'
+            ],
+            structures: [
+              { pattern: 'Possessive Determiner (my, your, his, her, its, our, their) + Noun', ex: 'our English class' }
+            ],
+            note: 'Phân biệt "its" (tính từ sở hữu) và "it\'s" (viết tắt của it is hoặc it has).',
+            noteEx: 'Đúng: "The cat licked its paw." vs. "It\'s time to start."',
+            applications: [
+              'In daily communication: Nói về đồ vật, gia đình, công việc của bản thân và người khác.',
+              'In writing: Tránh nhầm lẫn its và it\'s.',
+              'In grammar: Luôn đi kèm danh từ phía sau.'
+            ],
+            sampleSentence: 'Every learner should keep their own vocabulary list.',
+            correctWord: 'their',
+            alt1: 'theirs (trước Noun)',
+            alt2: 'it\'s (sở hữu)',
+            alt3: 'them',
+            keyTip: 'luôn đứng trước danh từ; phân biệt "its" và "it\'s"'
+          },
+          {
+            name: 'Numbers',
+            viSub: 'Số từ (Cardinal & Ordinal)',
+            def: 'Numbers (Số từ) đứng trước danh từ để chỉ số lượng (số đếm: one, two, three...) hoặc vị trí/thứ tự (số thứ tự: first, second, third...).',
+            usage: [
+              'Số đếm chỉ số lượng: "We have three lessons every week."',
+              'Số thứ tự chỉ vị trí/thứ tự, thường có "the" hoặc tính từ sở hữu: "This is the first chapter."',
+              'Đứng trước tính từ mô tả khi cùng đứng trước danh từ: "my first English test".'
+            ],
+            structures: [
+              { pattern: 'Cardinal Number (one, two, five...) + Plural Noun (nếu > 1)', ex: 'four chapters' },
+              { pattern: 'the / possessive + Ordinal Number (first, second, third...) + Noun', ex: 'the second lesson' }
+            ],
+            note: 'Số thứ tự (first, second, third...) thường đi kèm "the" và đứng trước tính từ.',
+            noteEx: 'Đúng: "the first important rule" (không nói "first the important rule").',
+            applications: [
+              'In lessons/chapters: Nói về bài số mấy, lần thứ mấy.',
+              'In dates/rankings: Xếp hạng hoặc mốc thứ tự.',
+              'In speaking: "This is my second time taking this course."'
+            ],
+            sampleSentence: 'This is the first time I have tried this method.',
+            correctWord: 'the first',
+            alt1: 'first the',
+            alt2: 'one first',
+            alt3: 'a first the',
+            keyTip: 'số đếm chỉ số lượng; số thứ tự chỉ thứ tự (thường có "the" đứng trước)'
+          }
+        ]
+      }
+    ];
+
+    function openOverview() {
+      isOverviewMode = true;
+      document.getElementById('overview-card').classList.remove('hidden');
+      document.getElementById('subtopic-detail-card').classList.add('hidden');
+      document.getElementById('current-breadcrumb').textContent = 'Giới thiệu chung PARTS OF SPEECH';
+      renderGroupButtons();
+      renderSubtopicPills();
+    }
+
+    function openSubtopic(groupIdx, subIdx) {
+      currentGroupIdx = groupIdx;
+      currentSubIdx = subIdx;
+      isOverviewMode = false;
+      subShowAllQ = false;
+
+      const grp = POS_GROUPS[groupIdx];
+      const sub = grp.subtopics[subIdx];
+
+      document.getElementById('overview-card').classList.add('hidden');
+      document.getElementById('subtopic-detail-card').classList.remove('hidden');
+      document.getElementById('current-breadcrumb').textContent = `Thẻ ${grp.code} ${grp.en} → ${sub.name} (${sub.viSub})`;
+
+      renderGroupButtons();
+      renderSubtopicPills();
+      renderSingleSubtopicCard();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function selectGroupOnly(groupIdx) {
+      currentGroupIdx = groupIdx;
+      currentSubIdx = 0;
+      renderGroupButtons();
+      renderSubtopicPills();
+      if (!isOverviewMode) {
+        renderSingleSubtopicCard();
+      }
+    }
+
+    function renderGroupButtons() {
+      const container = document.getElementById('group-buttons');
+      container.innerHTML = POS_GROUPS.map((g, idx) => {
+        const active = !isOverviewMode && idx === currentGroupIdx;
+        return `
+          <button type="button" onclick="selectGroupOnly(${idx})"
+            class="tile-btn p-3 rounded-2xl border-2 text-left transition ${
+              active
+                ? 'bg-indigo-700 text-white border-indigo-700 shadow'
+                : 'bg-white text-slate-900 border-slate-300 hover:border-indigo-500'
+            }">
+            <div class="text-xs font-extrabold ${active ? 'text-indigo-200' : 'text-indigo-700'}">${g.code}</div>
+            <div class="font-display font-extrabold text-sm leading-tight mt-0.5">${g.en}</div>
+            <div class="text-[11px] ${active ? 'text-indigo-100' : 'text-slate-600'} mt-0.5">${g.vi}</div>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function renderSubtopicPills() {
+      const grp = POS_GROUPS[currentGroupIdx];
+      document.getElementById('sub-list-title').textContent = `Các thẻ thành phần con của ${grp.code} ${grp.en} (${grp.vi}):`;
+      document.getElementById('sub-count-badge').textContent = `${grp.subtopics.length} thẻ riêng biệt`;
+
+      const pills = document.getElementById('subtopic-pills');
+      pills.innerHTML = grp.subtopics.map((s, idx) => {
+        const active = !isOverviewMode && idx === currentSubIdx;
+        return `
+          <button type="button" onclick="openSubtopic(${currentGroupIdx}, ${idx})"
+            class="tile-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold border-2 transition ${
+              active
+                ? 'bg-slate-950 text-sky-300 border-slate-950 shadow'
+                : 'bg-slate-50 text-slate-900 border-slate-300 hover:border-indigo-500 hover:bg-indigo-50/50'
+            }">
+            ${currentGroupIdx + 1}.${idx + 1} ${s.name}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function renderOverviewGrid() {
+      const grid = document.getElementById('overview-8-grid');
+      grid.innerHTML = POS_GROUPS.map((g, gIdx) => `
+        <div class="rounded-3xl border-2 border-slate-200 bg-slate-50 p-5 flex flex-col justify-between gap-4">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 rounded-lg bg-indigo-100 text-indigo-900 text-xs font-extrabold">${g.code}</span>
+              <span class="text-xs font-bold text-slate-500">${g.subtopics.length} mục con</span>
+            </div>
+            <h3 class="font-display text-lg font-extrabold text-slate-950">${g.en} (${g.vi})</h3>
+            <p class="text-sm text-slate-800 leading-relaxed">${g.intro}</p>
+          </div>
+          <div class="space-y-1.5">
+            ${g.subtopics.map((s, sIdx) => `
+              <button type="button" onclick="openSubtopic(${gIdx}, ${sIdx})"
+                class="w-full text-left px-3 py-1.5 rounded-xl bg-white hover:bg-indigo-50 border border-slate-200 hover:border-indigo-400 text-xs font-bold text-slate-900 transition">
+                • ${s.name}
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderSingleSubtopicCard() {
+      const grp = POS_GROUPS[currentGroupIdx];
+      const sub = grp.subtopics[currentSubIdx];
+      const subCode = `${currentGroupIdx + 1}.${currentSubIdx + 1}`;
+      const exercises = buildTenExercises(
+        sub.name,
+        `${grp.code} ${grp.en}`,
+        sub.keyTip,
+        sub.correctWord,
+        sub.alt1,
+        sub.alt2,
+        sub.alt3,
+        sub.sampleSentence
+      );
+
+      const container = document.getElementById('subtopic-detail-card');
+      container.innerHTML = `
+        <!-- Header thẻ thành phần con -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b-2 border-slate-200 pb-5">
+          <div class="space-y-1">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 text-indigo-950 text-xs font-extrabold">
+              <span>THẺ RIÊNG BIỆT ${subCode}</span> • <span>${grp.code} ${grp.en} (${grp.vi})</span>
+            </div>
+            <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-slate-950">
+              ${subCode} ${sub.name} — <span class="text-indigo-700">${sub.viSub}</span>
+            </h2>
+          </div>
+
+          <div class="flex items-center gap-2 self-start md:self-auto">
+            <button type="button" onclick="openSubtopic(${currentGroupIdx}, (currentSubIdx - 1 + POS_GROUPS[currentGroupIdx].subtopics.length) % POS_GROUPS[currentGroupIdx].subtopics.length)"
+              class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-xs font-extrabold text-slate-900 transition">
+              ← Thẻ trước
+            </button>
+            <button type="button" onclick="openSubtopic(${currentGroupIdx}, (currentSubIdx + 1) % POS_GROUPS[currentGroupIdx].subtopics.length)"
+              class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-xs font-extrabold text-slate-900 transition">
+              Thẻ tiếp →
+            </button>
+          </div>
+        </div>
+
+        <!-- I. ĐỊNH NGHĨA -->
+        <div class="rounded-3xl bg-indigo-50/70 border-2 border-indigo-200 p-6 space-y-2">
+          <h3 class="font-display text-xl font-extrabold text-indigo-950">I. ĐỊNH NGHĨA</h3>
+          <p class="text-base sm:text-lg text-slate-900 leading-relaxed">${sub.def}</p>
+        </div>
+
+        <!-- II. CÁCH DÙNG (Ít nhất 3 ví dụ) -->
+        <div class="rounded-3xl bg-white border-2 border-slate-200 p-6 space-y-3">
+          <h3 class="font-display text-xl font-extrabold text-slate-950">II. CÁCH DÙNG</h3>
+          <ul class="space-y-2.5 text-base text-slate-800">
+            ${sub.usage.map(u => `
+              <li class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-start justify-between gap-3">
+                <span class="leading-relaxed">• ${u}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+
+        <!-- III. CẤU TRÚC (Có ví dụ đi kèm từng loại) -->
+        <div class="rounded-3xl bg-white border-2 border-slate-200 p-6 space-y-4">
+          <h3 class="font-display text-xl font-extrabold text-slate-950">III. CẤU TRÚC</h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            ${sub.structures.map(st => `
+              <div class="p-4 rounded-2xl bg-teal-50/70 border-2 border-teal-200 space-y-2">
+                <div class="font-mono-code text-sm font-extrabold text-teal-950">${st.pattern}</div>
+                <div class="flex items-center justify-between gap-2 pt-1">
+                  <span class="text-sm font-bold text-slate-900">Ví dụ: <em>"${st.ex}"</em></span>
+                  <button type="button" onclick="speakText('${st.ex.replace(/'/g, "\\'")}')"
+                    class="shrink-0 w-9 h-9 rounded-xl bg-white border border-teal-300 flex items-center justify-center text-sm" title="Nghe ví dụ">🔊</button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- IV. LƯU Ý (Kèm ví dụ minh họa) -->
+        <div class="rounded-3xl bg-amber-50/80 border-2 border-amber-300 p-6 space-y-2.5">
+          <h3 class="font-display text-xl font-extrabold text-amber-950">IV. LƯU Ý</h3>
+          <p class="text-base text-slate-900 leading-relaxed">${sub.note}</p>
+          <div class="p-3.5 rounded-2xl bg-white border border-amber-300 text-sm sm:text-base font-bold text-slate-950">
+            Ví dụ minh họa: ${sub.noteEx}
+          </div>
+        </div>
+
+        <!-- V. CÁCH ÁP DỤNG TRONG TIẾNG ANH (Ít nhất 3 ví dụ) -->
+        <div class="rounded-3xl bg-white border-2 border-slate-200 p-6 space-y-3">
+          <h3 class="font-display text-xl font-extrabold text-slate-950">V. CÁCH ÁP DỤNG TRONG TIẾNG ANH</h3>
+          <div class="grid md:grid-cols-3 gap-3.5">
+            ${sub.applications.map((app, i) => `
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1.5">
+                <span class="text-xs font-extrabold uppercase text-indigo-700">Ứng dụng ${i + 1}</span>
+                <p class="text-sm sm:text-base text-slate-900 leading-relaxed">${app}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- VI. MỘT SỐ BÀI TẬP (10 câu đa dạng) -->
+        <div class="rounded-3xl bg-slate-50 border-2 border-slate-300 p-6 space-y-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-4">
+            <div>
+              <h3 class="font-display text-xl font-extrabold text-slate-950">VI. MỘT SỐ BÀI TẬP (10 CÂU)</h3>
+              <p class="text-xs sm:text-sm text-slate-600">Đa dạng trắc nghiệm, điền từ, đúng/sai cho riêng mục ${sub.name}</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="px-3.5 py-1.5 rounded-xl bg-indigo-100 text-indigo-950 text-xs sm:text-sm font-extrabold">
+                Điểm: <span id="sub-quiz-score">0</span> / 10
+              </span>
+              <button type="button" onclick="toggleSubAllQ('${subCode}')" class="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 border border-slate-300 text-xs font-extrabold text-slate-900">
+                ${subShowAllQ ? 'Xem từng câu' : 'Xem tất cả 10 câu'}
+              </button>
+            </div>
+          </div>
+
+          <div id="sub-quiz-box"></div>
+
+          <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+            <button type="button" onclick="resetSubQuiz('${subCode}')" class="px-4 py-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-900 text-xs sm:text-sm font-extrabold transition">
+              Làm lại bài tập thẻ này
+            </button>
+            <button type="button" onclick="gradeSubQuiz('${subCode}')" class="px-5 py-3 rounded-2xl bg-indigo-700 hover:bg-indigo-800 text-white text-sm sm:text-base font-extrabold shadow transition">
+              Chấm Điểm Bài Tập (10 Câu)
+            </button>
+          </div>
+        </div>
+      `;
+
+      renderSubQuizQuestions(subCode, exercises);
+    }
+
+    function getSubKey(subCode, qId) {
+      return `${subCode}__q${qId}`;
+    }
+
+    function saveSubAnswer(subCode, qId, val) {
+      subAnswers[getSubKey(subCode, qId)] = val;
+    }
+
+    function toggleSubAllQ(subCode) {
+      subShowAllQ = !subShowAllQ;
+      renderSingleSubtopicCard();
+    }
+
+    function renderSubQuizQuestions(subCode, exercises) {
+      const box = document.getElementById('sub-quiz-box');
+      const list = subShowAllQ ? exercises : [exercises[0]];
+
+      box.innerHTML = list.map((ex, idxDisplay) => {
+        const key = getSubKey(subCode, ex.id);
+        const saved = subAnswers[key] ?? '';
+
+        let controlHtml = '';
+        if (ex.type === 'fill') {
+          controlHtml = `
+            <input type="text" value="${saved}" placeholder="${ex.placeholder}"
+              oninput="saveSubAnswer('${subCode}', ${ex.id}, this.value)"
+              class="w-full sm:w-72 px-4 py-2.5 rounded-2xl bg-white border-2 border-slate-300 focus:border-indigo-600 focus:outline-none font-mono-code font-bold text-indigo-900 text-sm sm:text-base" />
+          `;
+        } else {
+          controlHtml = `
+            <div class="grid sm:grid-cols-2 gap-2.5">
+              ${ex.options.map((opt, oIdx) => `
+                <label class="flex items-center gap-2.5 p-3 rounded-2xl bg-white border-2 ${
+                  parseInt(saved, 10) === oIdx ? 'border-indigo-600 bg-indigo-50/50' : 'border-slate-200 hover:border-indigo-400'
+                } cursor-pointer transition">
+                  <input type="radio" name="sq-${subCode}-${ex.id}" value="${oIdx}" ${parseInt(saved, 10) === oIdx ? 'checked' : ''}
+                    onchange="saveSubAnswer('${subCode}', ${ex.id}, this.value)" class="w-4 h-4 text-indigo-700" />
+                  <span class="text-sm font-bold text-slate-900">${opt}</span>
+                </label>
+              `).join('')}
+            </div>
+          `;
+        }
+
+        return `
+          <div id="sq-card-${subCode}-${ex.id}" class="p-5 rounded-2xl bg-white border-2 border-slate-200 space-y-3">
+            <p class="font-bold text-base text-slate-950">${ex.prompt}</p>
+            ${controlHtml}
+            <div id="sq-fb-${subCode}-${ex.id}" class="hidden p-3 rounded-xl text-sm font-semibold"></div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function gradeSubQuiz(subCode) {
+      subShowAllQ = true;
+      renderSingleSubtopicCard();
+
+      const grp = POS_GROUPS[currentGroupIdx];
+      const sub = grp.subtopics[currentSubIdx];
+      const exercises = buildTenExercises(
+        sub.name,
+        `${grp.code} ${grp.en}`,
+        sub.keyTip,
+        sub.correctWord,
+        sub.alt1,
+        sub.alt2,
+        sub.alt3,
+        sub.sampleSentence
+      );
+
+      let score = 0;
+      exercises.forEach(ex => {
+        const card = document.getElementById(`sq-card-${subCode}-${ex.id}`);
+        const fb = document.getElementById(`sq-fb-${subCode}-${ex.id}`);
+        const raw = (subAnswers[getSubKey(subCode, ex.id)] ?? '').toString().trim().toLowerCase();
+
+        const isCorrect = ex.type === 'fill'
+          ? ex.accepted.includes(raw)
+          : parseInt(raw, 10) === ex.answer;
+
+        fb.classList.remove('hidden');
+        if (isCorrect) {
+          score++;
+          card.className = 'p-5 rounded-2xl bg-emerald-50/70 border-2 border-emerald-500 space-y-3';
+          fb.className = 'p-3 rounded-xl bg-emerald-100 text-emerald-950 text-sm font-semibold';
+          fb.innerHTML = `<strong>✓ Chính xác!</strong> ${ex.explain}`;
+        } else {
+          card.className = 'p-5 rounded-2xl bg-rose-50/70 border-2 border-rose-500 space-y-3';
+          fb.className = 'p-3 rounded-xl bg-rose-100 text-rose-950 text-sm font-semibold';
+          const ansDisplay = ex.type === 'fill' ? ex.accepted[0] : ex.options[ex.answer];
+          fb.innerHTML = `<strong>✗ Chưa đúng.</strong> Đáp án: <strong>${ansDisplay}</strong>. ${ex.explain}`;
+        }
+      });
+
+      document.getElementById('sub-quiz-score').textContent = score;
+    }
+
+    function resetSubQuiz(subCode) {
+      Object.keys(subAnswers).forEach(k => {
+        if (k.startsWith(`${subCode}__`)) delete subAnswers[k];
+      });
+      subShowAllQ = true;
+      renderSingleSubtopicCard();
+      document.getElementById('sub-quiz-score').textContent = '0';
+    }
+
+    renderGroupButtons();
+    renderSubtopicPills();
+    renderOverviewGrid();
+  </script>
+</body>
+</html>
